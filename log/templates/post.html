@@ -19,7 +19,11 @@
       {% csrf_token %}
       <div class="kind">
         <label class="kinds" for="volunteerKinds">봉사 종류</label>
-        <select id="volunteerKinds" name="봉사 종류">
+        <select
+          id="volunteerKinds"
+          name="봉사 종류"
+          onchange="handleOnChange(this)"
+        >
           <option class="plo" value="플로깅">플로깅</option>
           <option value="채식">채식</option>
           <option value="용기내">용기내</option>

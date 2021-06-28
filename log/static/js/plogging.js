@@ -1,10 +1,11 @@
 const element = document.querySelector("#volunteerKinds");
 
-function createInput() {
-  const element = document.querySelector("#volunteerKinds");
-  console.log(element.value);
+function handleOnChange(e) {
+  const value = e.value;
+  console.log(value);
 
   if (element.value === "플로깅") {
+    console.log(value);
     const firstPlace = document.querySelector(".firstPlace");
     const newInput = document.createElement("input");
     newInput.type = "text";
@@ -12,4 +13,3 @@ function createInput() {
     firstPlace.appendChild(newInput);
   }
 }
-element.addEventListener(onclick, createInput);
