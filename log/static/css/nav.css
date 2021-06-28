@@ -1,0 +1,30 @@
+/*nav-bar css start*/
+.header {
+  height: 40px;
+  background-color: #f3f6fa;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+.headerItem a {
+  text-decoration: none;
+  color: black;
+}
+.headerItem {
+  display: flex;
+  align-items: center;
+}
+.headerItem .menu {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  width: 40%;
+  text-align: center;
+}
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+/*nav-bar css end*/

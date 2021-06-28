@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}{% block extrahead %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenLog</title>
+    <link />
+    <link rel="stylesheet" href="{% static 'css/post.css' %}" />
+    <link rel="stylesheet" href='{% static "css/reset.css" %}' />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    {% endblock%}
+  </head>
+  <body>
+    {%block content%}
+    <form action="" enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <div class="kind">
+        <label class="kinds" for="volunteerKinds">봉사 종류</label>
+        <select id="volunteerKinds" name="봉사 종류">
+          <option class="plo" value="플로깅">플로깅</option>
+          <option value="채식">채식</option>
+          <option value="용기내">용기내</option>
+          <option value="고고">고고</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="main">
+        <div class="title">
+          <span>제목</span>
+          <input type="text" name="title" />
+        </div>
+        <div class="author">
+          <span>글쓴이</span>
+          <input type="text" name="author" />
+        </div>
+        <div class="content">
+          <span>내용</span>
+          <textarea name="content" cols="30" rows="10"></textarea>
+        </div>
+        <div class="photo">
+          <input type="file" name="images" />
+        </div>
+        <div class="firstPlace">
+          <!-- <input type="text" name="place"> -->
+        </div>
+        <div>
+          <input type="submit" />
+        </div>
+      </div>
+    </form>
+    <script type="text/javascript" src="/static/js/plogging.js"></script>
+    {% endblock %}
+  </body>
+</html>
