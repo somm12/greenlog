@@ -1,0 +1,80 @@
+.rrrr {
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+}
+.all {
+  padding: 31px 20px 0 20px;
+  margin: 0 87px 0 87px;
+  height: 1000px;
+  background-color: cornsilk;
+}
+.post {
+  width: 935px;
+  height: 600px;
+  background-color: aqua;
+  display: flex;
+  flex-direction: row;
+}
+.photo {
+  width: 600px;
+  height: 600px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 335px;
+  height: 600px;
+}
+.element {
+  display: flex;
+  flex-direction: column;
+
+  background-color: bisque;
+}
+
+.eachheader {
+  height: 72px;
+  padding: 16px;
+  display: block;
+  box-sizing: border-box;
+  background-color: blue;
+}
+
+.gul {
+  box-sizing: border-box;
+  height: 370px;
+  padding: 16px 12px;
+
+  background-color: yellowgreen;
+}
+.likeCommSend {
+  height: 45px;
+  padding: 4px 16px 0px 16px;
+  background-color: burlywood;
+}
+.likecount {
+  padding: 0 16px;
+  margin-bottom: 4px;
+}
+.date {
+  font-size: small;
+  padding-left: 16px;
+  margin: 4px 0px 8px 0;
+}
+.comment {
+  padding: 0 16px;
+  height: 55px;
+  background-color: chocolate;
+  box-sizing: border-box;
+}
+.comment > div {
+  line-height: 55px;
+}
+hr {
+  margin: 0;
+}
+
+.blankBar {
+  margin-top: 48px;
+}
