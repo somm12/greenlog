@@ -13,5 +13,13 @@ def signup(request):
 def post(request):
     return render(request, 'post.html')
 
+<<<<<<< HEAD
 def each(request):
     return render(request, 'eachView.html')
+=======
+def normal_view_page(request):
+    return render(request,'normal_view_page.html')
+
+def plogging_view_page(request):
+    return render(request, 'plogging_view_page.html')
+>>>>>>> 033aa39ff0c467f9d84cf4b03aaecc1fc1d82a96
