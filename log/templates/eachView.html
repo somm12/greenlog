@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}{% block extrahead %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href='{% static "css/eachView.css" %}' />
+    <title>GreenLog</title>
+    {% endblock%}
+  </head>
+  <body>
+    {%block content%}
+    <main class="rrrr">
+      <div class="all">
+        <div class="post">
+          <div class="photo"></div>
+          <div class="content">
+            <div class="elements">
+              <div class="eachheader"></div>
+              <hr />
+              <div class="gul"></div>
+              <hr />
+              <div class="likeCommSend"></div>
+              <div class="likecount">
+                <span>좋아요 ##개</span>
+              </div>
+              <div class="date">
+                <span>날짜</span>
+              </div>
+              <hr />
+              <div class="comment">
+                <div>
+                  좋아요 또는 댓글을 남기고 싶다면 <a href="#"> 로그인</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blankBar"></div>
+        <hr />
+        <div class="another">
+          <span>#님의 게시물 더 보기</span>
+        </div>
+      </div>
+    </main>
+    {% endblock %}
+  </body>
+</html>

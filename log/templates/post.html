@@ -15,46 +15,54 @@
   </head>
   <body>
     {%block content%}
-    <form action="" enctype="multipart/form-data" method="POST">
-      {% csrf_token %}
-      <div class="kind">
-        <label class="kinds" for="volunteerKinds">봉사 종류</label>
-        <select
-          id="volunteerKinds"
-          name="봉사 종류"
-          onchange="handleOnChange(this)"
-        >
-          <option class="plo" value="플로깅">플로깅</option>
-          <option value="채식">채식</option>
-          <option value="용기내">용기내</option>
-          <option value="고고">고고</option>
-          <option value="기타">기타</option>
-        </select>
-      </div>
-      <div class="main">
-        <div class="title">
-          <span>제목</span>
-          <input type="text" name="title" />
+    <div class="bodyall">
+      <form
+        action=""
+        enctype="multipart/form-data"
+        method="POST"
+        class="container"
+      >
+        {% csrf_token %}
+        <div class="kind">
+          <label class="kinds" for="volunteerKinds">봉사 종류</label>
+          <select
+            id="volunteerKinds"
+            name="봉사 종류"
+            onchange="handleOnChange(this)"
+          >
+            <option class="plo" value="플로깅">플로깅</option>
+            <option value="채식">채식</option>
+            <option value="용기내">용기내</option>
+            <option value="고고">고고</option>
+            <option value="기타">기타</option>
+          </select>
         </div>
-        <div class="author">
-          <span>글쓴이</span>
-          <input type="text" name="author" />
+        <div class="main">
+          <div class="title ele">
+            <span>제목</span>
+            <input type="text" name="title" />
+          </div>
+          <div class="author ele">
+            <span>글쓴이</span>
+            <input type="text" name="author" />
+          </div>
+          <div class="content ele">
+            <span>내용</span>
+            <textarea name="contentInput" cols="50" rows="20"></textarea>
+          </div>
+          <div class="photo ele">
+            <input type="file" name="images" />
+          </div>
+          <div class="firstPlace ele">
+            <span>플로깅 첫 시작 장소</span>
+            <input type="text" name="place" />
+          </div>
+          <div>
+            <input type="submit" class="submit" />
+          </div>
         </div>
-        <div class="content">
-          <span>내용</span>
-          <textarea name="content" cols="30" rows="10"></textarea>
-        </div>
-        <div class="photo">
-          <input type="file" name="images" />
-        </div>
-        <div class="firstPlace">
-          <!-- <input type="text" name="place"> -->
-        </div>
-        <div>
-          <input type="submit" />
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
     <script type="text/javascript" src="/static/js/plogging.js"></script>
     {% endblock %}
   </body>

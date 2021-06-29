@@ -19,7 +19,6 @@ class Plogging(models.Model):
     date = models.DateTimeField()
     firstPlace = models.CharField(max_length=30)
     like=models.IntegerField()
-    hate=models.IntegerField()
 
 
 
