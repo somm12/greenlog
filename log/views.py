@@ -12,3 +12,9 @@ def signup(request):
 
 def post(request):
     return render(request, 'post.html')
+
+def normal_view_page(request):
+    return render(request,'normal_view_page.html')
+
+def plogging_view_page(request):
+    return render(request, 'plogging_view_page.html')
