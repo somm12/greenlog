@@ -12,3 +12,6 @@ def signup(request):
 
 def post(request):
     return render(request, 'post.html')
+
+def mypage(request):
+    return render(request, 'mypage.html')

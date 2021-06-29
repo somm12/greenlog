@@ -26,5 +26,6 @@ urlpatterns = [
     path('login/',login, name="login"),
     path('signup/',signup, name="signup"),
     path('post/',post,name="post"),
+    path('mypage/',mypage,name="mypage"),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
