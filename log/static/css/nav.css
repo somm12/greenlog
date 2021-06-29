@@ -1,10 +1,13 @@
 /*nav-bar css start*/
 .header {
   height: 40px;
-  background-color: #f3f6fa;
+  background-color: #ffff;
   display: flex;
-  justify-content: space-evenly;
-  padding: 15px;
+  justify-content: space-between;
+  padding: 15px 25px;
+}
+body {
+  background-color: #fafafa;
 }
 .headerItem a {
   text-decoration: none;
@@ -14,17 +17,37 @@
   display: flex;
   align-items: center;
 }
+.main_menu {
+  width: 50%;
+}
 .headerItem .menu {
   display: flex;
   justify-content: center;
   font-size: 18px;
   font-weight: 600;
-  width: 40%;
+
   text-align: center;
 }
 .menu {
-  width: 100%;
   display: flex;
   justify-content: space-around;
+}
+.login_out {
+  width: 8%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.login_out a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+.login_out {
+  border: 1px solid #a1d177;
+  border-radius: 20px;
+  padding: 8px;
+
+  text-align: center;
 }
 /*nav-bar css end*/

@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {%block content%}{% load static %}
+<head>
+  {% block extrahead %}
+  <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+  {% endblock%}
+</head>
+<div class="mypage_main">
+  <section class="section1_profile">
+    <!-- 파이썬으로 img, nickname 가져오기 -->
+    <div class="myprofile_img my_image">
+      <img src="../static/images/somm12.jpeg" alt="" />
+    </div>
+    <div class="myprofile_nickname">somm12 님</div>
+    <div class="myprofile_rank">등급 : silver🪙</div>
+  </section>
+  <section class="section2_mypost_activity">
+    <div class="mypost_img my_image">
+      <div class="mypost_card">
+        <div>
+          <img src="../static/images/bibibap.jpg" alt="" />
+        </div>
+        <div><img src="../static/images/salad.jpg" alt="" /></div>
+        <div><img src="../static/images/salad2.jpg" alt="" /></div>
+        <div><img src="../static/images/salad2.jpg" alt="" /></div>
+      </div>
+      <div class="mypost_card">
+        <div><img src="../static/images/garbage_can.jpg" alt="" /></div>
+        <div><img src="../static/images/plastic_trash2.jpg" alt="" /></div>
+        <div><img src="../static/images/mask_trash.jpg" alt="" /></div>
+        <div><img src="../static/images/mask_trash.jpg" alt="" /></div>
+      </div>
+      <div class="more_post_btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="my_lawn">
+      <div class="my_lawn_detail">
+        <section class="month">
+          <div>Jan</div>
+          <div>Feb</div>
+          <div>Mar</div>
+          <div>Apr</div>
+          <div>May</div>
+          <div>Jun</div>
+          <div>Jul</div>
+          <div>Aug</div>
+          <div>Sep</div>
+          <div>Oct</div>
+          <div>Nov</div>
+          <div>Dec</div>
+        </section>
+        <section class="my_lawn_date">
+          <div class="what_day">
+            <div>Mon</div>
+            <div>Wed</div>
+            <div>Fri</div>
+          </div>
+          <div class="count_day"></div>
+          <!-- 52주 -->
+          <!-- <div class="week">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div> -->
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+<script type="text/javascript" src="/static/js/mypage.js"></script>
+{% endblock%}
