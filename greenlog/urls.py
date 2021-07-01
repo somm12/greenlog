@@ -27,10 +27,13 @@ urlpatterns = [
     path('signup/',signup, name="signup"),
     path('post/',post,name="post"),
 
-     path('normal_view_page/',normal_view_page, name="normal_view_page"),
-    path('plogging_view_page/',plogging_view_page, name="plogging_view_page"),
+     path('others/',others, name="others"),
+    path('plogging/',plogging, name="plogging"),
     path('mypage/',mypage,name="mypage"),
     path('each/',each,name="each"),
+    path('container/',container, name="container"),
+    path('vegetarian/',vegetarian, name="vegetarian"),
+    path('gogo/',gogo, name="gogo"),
 
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
