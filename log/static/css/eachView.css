@@ -1,76 +1,118 @@
 .rrrr {
   display: flex;
   justify-content: center;
-  background-color: aliceblue;
+  background-color: #dfefd1;
 }
 .all {
   padding: 31px 20px 0 20px;
   margin: 0 87px 0 87px;
   height: 1000px;
-  background-color: cornsilk;
 }
 .post {
   width: 935px;
   height: 600px;
-  background-color: aqua;
   display: flex;
   flex-direction: row;
+  background-color: white;
+  padding: 5px;
+  border: 1px solid black;
 }
-.photo {
+.carousel-wrapper {
   width: 600px;
   height: 600px;
 }
+/* .img {
+  width: 600px;
+  height: 600px;
+} */
 .content {
   display: flex;
   flex-direction: column;
   width: 335px;
   height: 600px;
 }
+
 .element {
   display: flex;
   flex-direction: column;
-
-  background-color: bisque;
 }
 
 .eachheader {
   height: 72px;
   padding: 16px;
-  display: block;
+  display: flex;
+  flex-direction: row;
   box-sizing: border-box;
-  background-color: blue;
+}
+
+.image {
+  border-radius: 70%;
+  padding: 2px;
+  margin-right: 14px;
 }
 
 .gul {
   box-sizing: border-box;
   height: 370px;
-  padding: 16px 12px;
-
-  background-color: yellowgreen;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
 }
+.auth > div:first-child {
+  padding-bottom: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.authCont > p {
+  line-height: 145%;
+  overflow: auto;
+  margin: 10px 0px 60px 32px;
+}
+.dalcomment {
+  display: flex;
+  flex-direction: column;
+}
+.dalcomment > div {
+  display: flex;
+  flex-direction: row;
+}
+
+.dalcomment > p {
+  line-height: 145%;
+  margin-left: 32px;
+}
+
 .likeCommSend {
   height: 45px;
-  padding: 4px 16px 0px 16px;
-  background-color: burlywood;
+  padding: 10px 16px 0px 16px;
+  box-sizing: border-box;
 }
 .likecount {
   padding: 0 16px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
+}
+.likecount > p {
+  font-size: 14px;
+  color: #262626;
+  font-weight: 600;
 }
 .date {
-  font-size: small;
   padding-left: 16px;
   margin: 4px 0px 8px 0;
 }
+.date > p {
+  font-size: 10px;
+  color: #8e8e8e;
+}
+
 .comment {
-  padding: 0 16px;
+  padding: 25px 16px;
   height: 55px;
-  background-color: chocolate;
   box-sizing: border-box;
 }
-.comment > div {
-  line-height: 55px;
-}
+
 hr {
   margin: 0;
 }
@@ -80,4 +122,63 @@ hr {
 }
 .another {
   margin-top: 48px;
+}
+
+.carousel-wrapper {
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  position: relative;
+  text-align: center;
+}
+
+.owl-carousel .owl-nav {
+  overflow: hidden;
+  height: 0px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #5110e9;
+}
+
+.owl-carousel .item {
+  text-align: center;
+}
+
+.owl-carousel .nav-button {
+  height: 50px;
+  width: 25px;
+  cursor: pointer;
+  position: absolute;
+  top: 110px !important;
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled {
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.owl-carousel .owl-prev {
+  left: -35px;
+}
+
+.owl-carousel .owl-next {
+  right: -35px;
+}
+
+.owl-theme .owl-nav [class*="owl-"] {
+  color: #ffffff;
+  font-size: 39px;
+  background: #000000;
+  border-radius: 3px;
+}
+
+.owl-carousel .prev-carousel:hover {
+  background-position: 0px -53px;
+}
+
+.owl-carousel .next-carousel:hover {
+  background-position: -24px -53px;
 }
