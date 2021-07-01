@@ -21,9 +21,18 @@ def mypage(request):
 def each(request):
     return render(request, 'eachView.html')
 
-def normal_view_page(request):
-    return render(request,'normal_view_page.html')
+def others(request):
+    return render(request,'others.html')
 
-def plogging_view_page(request):
-    return render(request, 'plogging_view_page.html')
+def plogging(request):
+    return render(request, 'plogging.html')
+
+def container(request):
+    return render(request, 'container.html')
+
+def gogo(request):
+    return render(request, 'gogo.html')
+
+def vegetarian(request):
+    return render(request, 'vegetarian.html')
 

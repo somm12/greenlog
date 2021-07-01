@@ -20,11 +20,11 @@
           </a>
         </div>
         <div class="headerItem menu main_menu">
-          <div class="menu"><a href="#">플로깅</a></div>
-          <div class="menu"><a href="#">채식</a></div>
-          <div class="menu"><a href="#">용기내챌린지</a></div>
-          <div class="menu"><a href="#">고고챌린지</a></div>
-          <div class="menu"><a href="#">기타</a></div>
+          <div class="menu"><a href="{% url 'plogging' %}">플로깅</a></div>
+          <div class="menu"><a href="{% url 'vegetarian' %}">채식</a></div>
+          <div class="menu"><a href="{% url 'container' %}">용기내챌린지</a></div>
+          <div class="menu"><a href="{% url 'gogo' %}">고고챌린지</a></div>
+          <div class="menu"><a href="{% url 'others' %}">기타</a></div>
         </div>
         <div class="login_out">
           <div class="menu"><a href="{% url 'login' %}">로그인/가입</a></div>
