@@ -2,7 +2,17 @@
 <head>
   {% block extrahead %}
   <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+  />
+  <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
   <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
 
   {% endblock%}
 </head>
@@ -16,27 +26,38 @@
     <div class="myprofile_rank">등급 : silver🪙</div>
   </section>
   <section class="section2_mypost_activity">
-    <div class="mypost_img my_image">
-      <div class="mypost_card">
-        <div>
+    <div class="carousel-wrapper">
+      <div class="owl-carousel owl-theme">
+        <div class="item">
           <img src="../static/images/bibibap.jpg" alt="" />
+          <img src="../static/images/salad.jpg" />
         </div>
-        <div><img src="../static/images/salad.jpg" alt="" /></div>
-        <div><img src="../static/images/salad2.jpg" alt="" /></div>
-        <div><img src="../static/images/water_bottle.jpg" alt="" /></div>
-      </div>
-      <div class="mypost_card">
-        <div><img src="../static/images/garbage_can.jpg" alt="" /></div>
-        <div><img src="../static/images/plastic_trash2.jpg" alt="" /></div>
-        <div><img src="../static/images/mask_trash.jpg" alt="" /></div>
-        <div><img src="../static/images/recycling.jpg" alt="" /></div>
-      </div>
-      <div class="more_post_btn">
-        <div></div>
-        <div></div>
-        <div></div>
+        <div class="item">
+          <img src="../static/images/salad2.jpg" />
+          <img src="../static/images/mask_trash.jpg" />
+        </div>
+        <div class="item">
+          <img src="../static/images/garbage_can.jpg" />
+          <img src="../static/images/water_bottle.jpg" />
+        </div>
+        <div class="item">
+          <img src="../static/images/plastic_trash.jpg" />
+          <img src="../static/images/plastic_trash2.jpg" />
+        </div>
+        <div class="item">
+          <img src="../static/images/recycling.jpg" />
+          <img src="../static/images/bibibap.jpg" />
+        </div>
+        <div class="item">
+          <img src="../static/images/bibibap.jpg" />
+          <img src="../static/images/bibibap.jpg" />
+        </div>
+        <div class="item">
+          <img src="../static/images/bibibap.jpg" />
+        </div>
       </div>
     </div>
+
     <div class="my_lawn">
       <div class="my_lawn_detail">
         <section class="month">
@@ -76,4 +97,27 @@
   </section>
 </div>
 <script type="text/javascript" src="/static/js/mypage.js"></script>
+<script>
+  var nickname = document.querySelector(".login_text");
+  nickname.innerHTML = "somm12님";
+  $(".owl-carousel").owlCarousel({
+    margin: 15,
+    nav: true,
+    navText: [
+      "<div class='nav-button owl-prev'>‹</div>",
+      "<div class='nav-button owl-next'>›</div>",
+    ],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 2,
+      },
+      1000: {
+        items: 4,
+      },
+    },
+  });
+</script>
 {% endblock%}

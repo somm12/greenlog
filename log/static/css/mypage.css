@@ -31,32 +31,81 @@
 .myprofile_img img {
   border-radius: 50%;
 }
-/* section2 -> 나의 활동 부분 */
-.mypost_img {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* section2 -> 나의 활동 부분 carousel part */
+/* carousel API css */
+.owl-carousel img {
+  width: 200px;
+  height: 200px;
+  padding: 10px;
 }
-.mypost_card {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 15px;
+.carousel-wrapper {
+  margin: auto;
+  position: relative;
+  text-align: center;
+  font-family: sans-serif;
+}
+/* carousel nav부분 없애는 css */
+.owl-carousel .owl-nav {
+  overflow: hidden;
+  height: 0px;
 }
 
-.more_post_btn {
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #5110e9;
+}
+
+.owl-carousel .item {
+  text-align: center;
+}
+
+.owl-carousel .nav-button {
+  height: 20px;
+  width: 20px;
+
+  cursor: pointer;
+  position: absolute;
+  top: 200px !important;
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled {
+  pointer-events: none;
+  /* pointer-events : 화살표 click 반응 x */
+  opacity: 0.25;
+}
+
+.owl-carousel .owl-prev {
+  left: -35px;
+}
+
+.owl-carousel .owl-next {
+  right: -45px;
+}
+
+.owl-theme .owl-nav [class*="owl-"] {
+  color: #ffffff;
+  font-size: 30px;
+  background: #757373;
+  border-radius: 3px;
+  border-radius: 50%;
+  padding: 4px;
   display: flex;
-  justify-content: space-between;
-  width: 10%;
-  margin: 20px 0px;
+  justify-content: center;
+  align-items: center;
 }
-.more_post_btn div {
-  background-color: rgb(170, 165, 165);
-  width: 8px;
-  height: 8px;
+
+.owl-carousel .prev-carousel:hover {
+  background-position: 0px -53px;
 }
+
+.owl-carousel .next-carousel:hover {
+  background-position: -24px -53px;
+}
+
 /* my lawn 잔디밭 파트 */
 .my_lawn {
+  margin-top: 30px;
   height: 120px;
 }
 .my_lawn_detail {
