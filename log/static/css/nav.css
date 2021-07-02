@@ -13,6 +13,9 @@ body {
   text-decoration: none;
   color: black;
 }
+.headerItem a img {
+  width: 200px;
+}
 .headerItem {
   display: flex;
   align-items: center;

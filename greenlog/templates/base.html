@@ -15,7 +15,7 @@
       <div class="header">
         <div class="headerItem">
           <a href="{% url 'home' %}">
-            <img class="logo" src="../../log/static/images/logo.png" alt="" />
+            <img class="logo" src="../static/images/logo.png" alt="" />
           </a>
         </div>
         <div class="headerItem menu main_menu">
@@ -28,7 +28,9 @@
           <div class="menu"><a href="{% url 'others' %}">기타</a></div>
         </div>
         <div class="login_out">
-          <div class="menu"><a href="{% url 'login' %}">로그인/가입</a></div>
+          <div class="menu">
+            <a class="login_text" href="{% url 'login' %}">로그인/가입</a>
+          </div>
         </div>
       </div>
 
