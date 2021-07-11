@@ -84,8 +84,8 @@ def mypage(request):
     myposts = Post.objects
     search = request.GET.get('search')
     if search == 'true':
-        writer = request.GET.get('writer')
-        myposts = Post.objects.filter(author = writer)
+        author = request.GET.get('author')
+        myposts = Post.objects.filter(writer = author)
     return render(request, 'mypage.html',{'myposts':myposts})
 
 
@@ -93,7 +93,8 @@ def each(request):
     return render(request, 'eachView.html')
 
 
-def detail(request):
+def create(request):
+    new_post = Post()
     post=request.GET['volunteerKinds']
     posts=[]
     posts.append(post)
@@ -110,7 +111,7 @@ def detail(request):
     elif post =='용기내':
         return render(request, 'container.html',{'posts':posts})
     elif post =='고고':
-        return render(requset, 'gogo.html',{'posts':posts})
+        return render(request, 'gogo.html',{'posts':posts})
     else :
         return render(request, 'others.html',{'posts':posts})
 
