@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import Post
 # Create your views here.
 def home(request):
     return render(request,'home.html')
@@ -15,7 +15,12 @@ def post(request):
 
 
 def mypage(request):
-    return render(request, 'mypage.html')
+    myposts = Post.objects
+    search = request.GET.get('search')
+    if search == 'true':
+        writer = request.GET.get('writer')
+        myposts = Post.objects.filter(author = writer)
+    return render(request, 'mypage.html',{'myposts':myposts})
 
 
 def each(request):

@@ -26,5 +26,5 @@ class User(models.Model):
     name = models.CharField(max_length=10)
     id = models.CharField(max_length=10,primary_key=True)
     password =models.CharField(max_length=20)
-    nickname =models.CharField(max_length=10)
+    nickname =models.CharField(max_length=10,null=True)
     profile = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
