@@ -10,18 +10,18 @@ def login(request):
     if request.method== 'GET':
         return render(request, 'login.html')
     elif request.method == 'POST':
-        id = request.POST.get('id', None)
+        nickname = request.POST.get('nickname', None)
         password = request.POST.get('password', None)
   
     res_data = {}
-    if not (id and password):
+    if not (nickname and password):
         res_data['error'] = '모든 값을 입력해야 합니다.'
         return render(request, 'login.html', res_data)
         
     else:
-        user = User.objects.get(id = id)
+        user = User.objects.get(nickname = nickname)
         if check_password(password, user.password):
-            request.session['user'] = user.id
+            request.session['user'] = user.nickname
             return redirect('home')
         else:
             res_data['error'] = '비밀번호가 틀렸습니다.'
@@ -41,7 +41,6 @@ def signup(request):
         return render(request, 'signup.html')
     elif request.method == 'POST':
         
-            id = request.POST['id']
             nickname = request.POST['nickname']
             name = request.POST['name']
             password = request.POST['password']
@@ -49,21 +48,17 @@ def signup(request):
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
 
-            if not (id and password and passwordcheck and nickname and name):
+            if not (password and passwordcheck and nickname and name):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
                 return render(request, 'signup.html', res_data)
             elif password != passwordcheck:
                 res_data['error'] = '비밀번호가 다릅니다'
-                return render(request, 'signup.html', res_data)
-            elif User.objects.filter(id = request.POST['id']).exists():
-                res_data['error'] = '이미 존재하는 아이디입니다.'
                 return render(request, 'signup.html', res_data)
             elif User.objects.filter(nickname = request.POST['nickname']).exists():
                 res_data['error'] = '이미 존재하는 닉네임입니다.'
                 return render(request, 'signup.html', res_data)
             else:
                 user = User( # 모델에서 생성한 User 클래스를 가져와 객체 생성
-                    id = id,
                     nickname = nickname,
                     name = name,
                     password = make_password(password),
