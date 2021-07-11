@@ -1,5 +1,8 @@
 function handleOnChange(e) {
   const value = e.value;
+  const formInput = Document.querySelector(form);
+  
+  console.log(formInput);
   if (value === "플로깅") {
     const firstPlace = document.querySelector(".firstPlace");
     const newDiv = document.createElement("span");
@@ -11,7 +14,6 @@ function handleOnChange(e) {
 
     firstPlace.appendChild(newDiv);
     firstPlace.appendChild(newInput);
-    console.log(firstPlace);
   } else {
     const e1 = document.querySelector(".firstPlace span");
     const e2 = document.querySelector(".firstPlace input");

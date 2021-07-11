@@ -74,6 +74,7 @@ def signup(request):
     return render(request, 'signup.html')
 
 def post(request):
+
     return render(request, 'post.html')
 
 
@@ -84,10 +85,33 @@ def mypage(request):
 def each(request):
     return render(request, 'eachView.html')
 
-def others(request):
-    return render(request,'others.html')
 
-def plogging(request):
+def detail(request):
+    post=request.GET['volunteerKinds']
+    posts=[]
+    posts.append(post)
+    posts.append(request.GET['title'])
+    posts.append(request.GET['author'])
+    posts.append(request.GET['contentInput'])
+    posts.append(request.GET['images'])
+    posts.append(request.GET['place'])
+
+    if post == '플로깅':
+        return render(request, 'plogging.html',{'posts':posts})
+    elif post =='채식':
+        return render(request, 'vegetarian.html',{'posts':posts})
+    elif post =='용기내':
+        return render(request, 'container.html',{'posts':posts})
+    elif post =='고고':
+        return render(requset, 'gogo.html',{'posts':posts})
+    else :
+        return render(request, 'others.html',{'posts':posts})
+
+
+
+def plogging(request,post):
+    if post ==null:
+        s = Plogging.objects.all()  
     return render(request, 'plogging.html')
 
 def container(request):
@@ -98,6 +122,9 @@ def gogo(request):
 
 def vegetarian(request):
     return render(request, 'vegetarian.html')
+
+def others(request):
+    return render(request,'others.html')
 
 def logout(request):
     
