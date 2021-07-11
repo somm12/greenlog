@@ -10,22 +10,21 @@ def login(request):
     if request.method== 'GET':
         return render(request, 'login.html')
     elif request.method == 'POST':
-        id = request.POST.get('id', None)
+        nickname = request.POST.get('nickname', None)
         password = request.POST.get('password', None)
   
     res_data = {}
-    if not (id and password):
+    if not (nickname and password):
         res_data['error'] = '모든 값을 입력해야 합니다.'
         return render(request, 'login.html', res_data)
         
     else:
-        user = User.objects.get(id = id)
+        user = User.objects.get(nickname = nickname)
         if check_password(password, user.password):
-            request.session['user'] = user.id
+            request.session['user'] = user.nickname
             return redirect('home')
         else:
             res_data['error'] = '비밀번호가 틀렸습니다.'
-    
             return render(request, 'login.html', res_data)
     
     if user is not None:
@@ -40,8 +39,6 @@ def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
-        
-            id = request.POST['id']
             nickname = request.POST['nickname']
             name = request.POST['name']
             password = request.POST['password']
@@ -49,21 +46,17 @@ def signup(request):
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
 
-            if not (id and password and passwordcheck and nickname and name):
+            if not (password and passwordcheck and nickname and name):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
                 return render(request, 'signup.html', res_data)
             elif password != passwordcheck:
                 res_data['error'] = '비밀번호가 다릅니다'
-                return render(request, 'signup.html', res_data)
-            elif User.objects.filter(id = request.POST['id']).exists():
-                res_data['error'] = '이미 존재하는 아이디입니다.'
                 return render(request, 'signup.html', res_data)
             elif User.objects.filter(nickname = request.POST['nickname']).exists():
                 res_data['error'] = '이미 존재하는 닉네임입니다.'
                 return render(request, 'signup.html', res_data)
             else:
                 user = User( # 모델에서 생성한 User 클래스를 가져와 객체 생성
-                    id = id,
                     nickname = nickname,
                     name = name,
                     password = make_password(password),
@@ -72,46 +65,56 @@ def signup(request):
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})
     return render(request, 'signup.html')
-
-def post(request):
-
-    return render(request, 'post.html')
+    
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+    return redirect('home.html')
 
 
 def mypage(request):
     return render(request, 'mypage.html')
 
 
-def each(request):
-    return render(request, 'eachView.html')
+def eachNomal(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
+    Post = get_object_or_404(Post, pk = post_id)
+    User= User.objects.get(pk=Post.writer)
+    return render(request, 'eachNomal.html',{'Post':Post,'User':User})
+
+def eachPlogging(request, post_id):
+    Plogging=get_object_or_404(Plogging,pk=post_id)
+    User= User.objects.get(pk=Post.writer)
+    return render(requst,'eachPlogging.html',{'Post':Post,'User':User})
+
+def create(request):
+    try:                            
+        firstPlace=request.POST['firstPlace']         
+    except Post.DoesNotExist:          #일반일 때 
+        plogging = Plogging()
+        plogging.kinds="plogging"
+        plogging.writer=request.GET(['author'])
+        plogging.content=request.GET(['contentInput'])
+        plogging.image=request.GET(['images'])
+        plogging.date=timezone.datetime.now()
+        plogging.firstPlace=request.GET(['firstPlace'])
+        plogging.like=0;
+        plogging.save()
+    else:                              #플로깅일 때                
+        post = Post()
+        post.kinds=request.GET(['volunteerKinds'])
+        post.title=request.GET(['title'])
+        post.writer=request.GET(['author'])
+        post.content=request.GET(['contentInput'])
+        post.image=request.GET(['images'])
+        post.date=timezone.datetime.now()
+        post.save()
+    return render(request,'home.html')
+
+def post(request):
+    return render(request, 'post.html')
 
 
-def detail(request):
-    post=request.GET['volunteerKinds']
-    posts=[]
-    posts.append(post)
-    posts.append(request.GET['title'])
-    posts.append(request.GET['author'])
-    posts.append(request.GET['contentInput'])
-    posts.append(request.GET['images'])
-    posts.append(request.GET['place'])
-
-    if post == '플로깅':
-        return render(request, 'plogging.html',{'posts':posts})
-    elif post =='채식':
-        return render(request, 'vegetarian.html',{'posts':posts})
-    elif post =='용기내':
-        return render(request, 'container.html',{'posts':posts})
-    elif post =='고고':
-        return render(requset, 'gogo.html',{'posts':posts})
-    else :
-        return render(request, 'others.html',{'posts':posts})
-
-
-
-def plogging(request,post):
-    if post ==null:
-        s = Plogging.objects.all()  
+def plogging(request):
     return render(request, 'plogging.html')
 
 def container(request):
@@ -126,9 +129,4 @@ def vegetarian(request):
 def others(request):
     return render(request,'others.html')
 
-def logout(request):
-    
-    if request.session.get('user'):
-        del(request.session['user'])
-        
-    return redirect('home')
+

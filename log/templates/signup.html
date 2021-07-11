@@ -18,8 +18,14 @@
         name="name"
       />
     </div>
-    <div class="idform">
-      <input type="text" class="id" id="id" placeholder="ID" name="id" />
+    <div class="nicknameform">
+      <input
+        type="text"
+        class="nickname"
+        id="nickname"
+        placeholder="Nickname"
+        name="nickname"
+      />
     </div>
     <div class="passwordform">
       <input
@@ -39,16 +45,9 @@
         name="passwordcheck"
       />
     </div>
-    <div class="nicknameform">
-      <input
-        type="text"
-        class="nickname"
-        id="nickname"
-        placeholder="Nickname"
-        name="nickname"
-      />
-    </div>
+
     <button type="submit" class="btn">sign up!!</button>
+    <div class="error">{{ error }}</div>
   </form>
 </body>
 {% endblock %}

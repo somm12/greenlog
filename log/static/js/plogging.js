@@ -1,7 +1,7 @@
 function handleOnChange(e) {
   const value = e.value;
-  const formInput = Document.querySelector(form);
-  
+  const formInput = Document.querySelector("#volunteerKinds");
+
   console.log(formInput);
   if (value === "플로깅") {
     const firstPlace = document.querySelector(".firstPlace");

@@ -15,7 +15,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
     />
-    <link rel="stylesheet" href='{% static "css/eachView.css" %}' />
+    <link rel="stylesheet" href='{% static "css/eachNomal.css" %}' />
     <title>GreenLog</title>
     {% endblock%}
   </head>
@@ -27,44 +27,9 @@
           <div class="carousel-wrapper">
             <div class="owl-carousel owl-theme">
               <div class="item">
-                <img
-                  class="img"
-                  src="../static/images/salad2.jpg"
-                  alt=""
-                  style="width: 600px; height: 600px"
-                />
-              </div>
-              <div class="item">
-                <img
-                  class="img aaa"
-                  src="../static/images/bibibap.jpg"
-                  alt=""
-                  style="width: 600px; height: 600px"
-                />
-              </div>
-              <div class="item">
-                <img
-                  class="img aaa"
-                  src="../static/images/bibibap.jpg"
-                  alt=""
-                  style="width: 600px; height: 600px"
-                />
-              </div>
-              <div class="item">
-                <img
-                  class="img aaa"
-                  src="../static/images/bibibap.jpg"
-                  alt=""
-                  style="width: 600px; height: 600px"
-                />
-              </div>
-              <div class="item">
-                <img
-                  class="img aaa"
-                  src="../static/images/bibibap.jpg"
-                  alt=""
-                  style="width: 600px; height: 600px"
-                />
+                {% for image in images %}
+                <img src="{{image}}" alt="" />
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -73,12 +38,14 @@
               <div class="eachheader">
                 <img
                   class="image"
-                  src="../static/images/user.jpg"
+                  src="{{User.profile}}"
                   alt=""
                   width="32px"
                   height="32px"
                 />
-                <span style="display: block; margin-top: 9px">govl6113</span>
+                <span style="display: block; margin-top: 9px"
+                  >{{User.nickname}}</span
+                >
               </div>
               <hr />
               <div class="gul">
@@ -86,33 +53,25 @@
                   <div>
                     <img
                       class="image"
-                      src="../static/images/user.jpg"
+                      src="{{User.profile}}"
                       alt=""
                       width="32px"
                       height="32px"
                     />
                     <span style="display: block; margin-top: 9px"
-                      >govl6113</span
+                      >{{User.nickname}}</span
                     >
                   </div>
                   <div class="authCont">
-                    <p>
-                      오늘의 채식 메뉴는 샐러드이다! 탄단지라도 채우려면 달걀,
-                      콩, 각종 야채.. 필수라구요 ㅠㅠ 환경을 위해, 내 건강을
-                      위해 이렇게 샐러드 먹기를 즐겨해야겠다!!
-                    </p>
+                    <p>{{Post.content}}</p>
                   </div>
                 </div>
 
+                <!-- 
                 <div class="dalcomment">
                   <div>
-                    <img
-                      class="image"
-                      src="../static/images/somm12.jpeg"
-                      alt=""
-                      width="32px"
-                      height="32px"
-                    />
+                    <img class="image" src={{"../static/images/somm12.jpeg"}}
+                    alt="" width="32px" height="32px" />
                     <span style="display: block; margin-top: 9px">somm12</span>
                   </div>
                   <p>
@@ -138,40 +97,30 @@
                   </p>
                 </div>
               </div>
+              -->
 
               <hr />
-              <div class="likeCommSend">
+              <div class="like">
                 <img
                   src="../static/images/heart.png"
                   alt=""
                   width="26px"
                   height="24px"
-                />
-                <img
-                  src="../static/images/comment.png"
-                  alt=""
-                  width="25px"
-                  height="25px"
-                />
-                <img
-                  src="../static/images/send.png"
-                  alt=""
-                  width="24px"
-                  height="24px"
+                  onclick=""
                 />
               </div>
               <div class="likecount">
                 <p>좋아요 30개</p>
               </div>
               <div class="date">
-                <p>3일전</p>
+                <p>{{Post.date}}</p>
               </div>
               <hr />
-              <div class="comment">
+              <!-- <div class="comment">
                 <div>
                   좋아요 또는 댓글을 남기고 싶다면 <a href="#"> 로그인</a>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
