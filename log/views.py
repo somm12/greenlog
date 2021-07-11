@@ -39,6 +39,7 @@ def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
+        
             nickname = request.POST['nickname']
             name = request.POST['name']
             password = request.POST['password']
@@ -65,7 +66,7 @@ def signup(request):
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})
     return render(request, 'signup.html')
-    
+
 def logout(request):
     if request.session.get('user'):
         del(request.session['user'])
