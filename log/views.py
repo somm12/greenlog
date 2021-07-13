@@ -88,27 +88,6 @@ def eachPlogging(request, post_id):
     return render(requst,'eachPlogging.html',{'Post':Post,'User':User})
 
 def create(request):
-    try:                            
-        firstPlace=request.POST['firstPlace']         
-    except Post.DoesNotExist:          #일반일 때 
-        plogging = Plogging()
-        plogging.kinds="plogging"
-        plogging.writer=request.GET(['author'])
-        plogging.content=request.GET(['contentInput'])
-        plogging.image=request.GET(['images'])
-        plogging.date=timezone.datetime.now()
-        plogging.firstPlace=request.GET(['firstPlace'])
-        plogging.like=0;
-        plogging.save()
-    else:                              #플로깅일 때                
-        post = Post()
-        post.kinds=request.GET(['volunteerKinds'])
-        post.title=request.GET(['title'])
-        post.writer=request.GET(['author'])
-        post.content=request.GET(['contentInput'])
-        post.image=request.GET(['images'])
-        post.date=timezone.datetime.now()
-        post.save()
     return render(request,'home.html')
 
 def post(request):
