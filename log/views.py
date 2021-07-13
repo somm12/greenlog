@@ -70,7 +70,7 @@ def signup(request):
 def logout(request):
     if request.session.get('user'):
         del(request.session['user'])
-    return redirect('home.html')
+    return redirect('home')
 
 
 def mypage(request):
