@@ -9,8 +9,14 @@
   <form action="." method="post" class="loginform">
     {% csrf_token %}
     <h1>Login</h1>
-    <div class="idform">
-      <input type="text" class="id" id="id" placeholder="ID" name="id" />
+    <div class="nicknameform">
+      <input
+        type="text"
+        class="nickname"
+        id="nickname"
+        placeholder="Nickname"
+        name="nickname"
+      />
     </div>
     <div class="passwordform">
       <input
@@ -25,6 +31,7 @@
     <div class="bottomText">
       Don't you have ID? <a href="{% url 'signup' %}">sign up</a>
     </div>
+    <div class="error">{{ error }}</div>
   </form>
 </body>
 {% endblock %}

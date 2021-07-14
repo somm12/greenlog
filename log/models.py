@@ -24,7 +24,16 @@ class Plogging(models.Model):
     firstPlace = models.CharField(max_length=30,default='')
     like=models.IntegerField(default=0)
 
-class Comment(models.Model):
-    writer =  models.ForeignKey(User,on_delete=models.CASCADE,default='')
-    context=models.TextField(max_length=100, default='')
+
+
+# class Comment(models.Model):
+#     post=models.ForeignKey(Post ,on_delete=models.CASCADE,default='')
+#     writer =  models.ForeignKey(User,on_delete=models.CASCADE,default='')
+#     context=models.TextField(max_length=100, default='')
+
+
+# class PloggingComment(models.Model):
+#     post=models.ForeignKey(Plogging ,on_delete=models.CASCADE,default='')
+#     writer =  models.ForeignKey(User,on_delete=models.CASCADE,default='')
+#     context=models.TextField(max_length=100, default='')
 

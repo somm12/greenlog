@@ -10,7 +10,7 @@
 .loginform {
   position: absolute;
   width: 350px;
-  height: 600px;
+  height: 500px;
   padding: 30px, 20px;
   background-color: rgb(237, 248, 223);
   text-align: center;
@@ -115,4 +115,8 @@
   border: none;
   cursor: pointer;
   display: inline;
+}
+
+.error {
+  color: red;
 }

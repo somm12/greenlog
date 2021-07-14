@@ -1,5 +1,6 @@
 function handleOnChange(e) {
   const value = e.value;
+
   const formInput = document.querySelector("#volunteerKinds");
 
   console.log(formInput);
