@@ -86,7 +86,14 @@ def mypage(request):
     if search == 'true':
         author = request.GET.get('author')
         myposts = Post.objects.filter(writer = author)
+        date = []
+        count = 0
+        for mypost in myposts:
+            count += 1
+            # date.append(mypost.pub_date.strftime("%m"))
+            # date.append(mypost.pub_date.strftime("%d"))
     return render(request, 'mypage.html',{'myposts':myposts})
+    # return render(request, 'mypage.html',{'myposts':myposts,'dates':date,'count':count})
 
 
 def each(request):

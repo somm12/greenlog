@@ -11,6 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 20%;
 }
 .myprofile_nickname {
   margin-top: 10px;
@@ -20,6 +21,66 @@
   margin-top: 10px;
   font-weight: 600;
 }
+/*myprofile level*/
+.user_level {
+  display: flex;
+  margin-top: 40px;
+  width: 100%;
+}
+.level_description {
+  width: 60%;
+}
+.level_title {
+  display: flex;
+  justify-content: space-between;
+}
+.level_title div {
+  font-weight: 600;
+}
+.level_mark_col {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0px;
+}
+.level_mark_col:first-child .level_name {
+  color: #ad5600;
+}
+.level_mark_col:nth-child(2) .level_name {
+  color: #435f7a;
+}
+.level_mark_col:nth-child(3) .level_name {
+  color: #eb9a01;
+}
+.level_mark_col:nth-child(4) .level_name {
+  color: #2a9e7b;
+}
+.level_mark_col:nth-child(5) .level_name {
+  color: #00b4fc;
+}
+.level_mark_col:last-child .level_name {
+  color: #ff0061;
+}
+.level_mark {
+  margin-top: 5px;
+}
+.left_post_num {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 30px;
+}
+.next_level {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #435f7a;
+  font-weight: 600;
+}
+.left_num_text {
+  font-weight: 600;
+}
+
+/*section2 start*/
 .section2_mypost_activity {
   width: 60%;
 }
@@ -144,15 +205,15 @@
   justify-content: space-evenly;
   height: 100%;
 }
-.week .count {
+.week .day {
   background-color: #d7d9dd;
   height: 10px;
   width: 10px;
   border-radius: 2px;
 }
-.week:nth-child(3n) .count:nth-child(2n) {
+/* .week:nth-child(3n) .day:nth-child(2n) {
   background-color: #a1d177;
 }
-.week:nth-child(4n) .count:nth-child(5n) {
+.week:nth-child(4n) .day:nth-child(5n) {
   background-color: #a1d177;
-}
+} */

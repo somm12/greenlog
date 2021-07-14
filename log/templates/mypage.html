@@ -23,7 +23,47 @@
       <img src="../static/images/somm12.jpeg" alt="" />
     </div>
     <div class="myprofile_nickname">{{user.nickname}}님</div>
+    {% comment %} {% if count > 10 %} {% endcomment %}
     <div class="myprofile_rank">등급 : silver🪙</div>
+    {% comment %} {% endif%} {% endcomment %}
+    <div class="user_level">
+      <div class="level_description">
+        <div class="level_title">
+          <div class="level">레벨</div>
+          <div class="num">개수</div>
+        </div>
+        <div class="level_mark">
+          <div class="level_mark_col">
+            <div class="level_name">Bronze</div>
+            <div class="level_num">0 - 14개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Silver</div>
+            <div class="level_num">15 - 29개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Gold</div>
+            <div class="level_num">30 - 44개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Platinum</div>
+            <div class="level_num">45 - 59개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Diamond</div>
+            <div class="level_num">60 - 75개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Ruby</div>
+            <div class="level_num">75개 이상</div>
+          </div>
+        </div>
+      </div>
+      <div class="left_post_num">
+        <div class="next_level">Silver</div>
+        <div class="left_num_text">까지 5개남음</div>
+      </div>
+    </div>
   </section>
   <section class="section2_mypost_activity">
     <div class="carousel-wrapper">
@@ -33,6 +73,7 @@
           {% comment %} <img src="myposts[i]['img'])" alt="" />
           if len(myposts) <= i 면 밑에꺼는 출력 x
           <img src="myposts[i+1]['img'])" alt="" /> {% endcomment %}
+
           <img src="../static/images/bibibap.jpg" alt="" />
           <img src="../static/images/salad.jpg" />
         </div>
