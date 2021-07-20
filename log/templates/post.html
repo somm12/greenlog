@@ -17,7 +17,7 @@
     {%block content%}
     <div class="bodyall">
       <form
-        action="create"
+        action={%url 'create'%}
         enctype="multipart/form-data"
         method="POST"
         class="container"
@@ -27,7 +27,7 @@
           <label class="kinds" for="volunteerKinds">봉사 종류</label>
           <select
             id="volunteerKinds"
-            name="봉사 종류"
+            name="volunteerKinds"
             onchange="handleOnChange(this)"
           >
             <option class="plo" value="플로깅">플로깅</option>
@@ -42,10 +42,12 @@
             <span>제목</span>
             <input type="text" name="title" />
           </div>
+          {% if request.session.user %}
           <div class="author ele">
             <span>글쓴이</span>
-            <input type="text" name="author" />
+            <input type="text" name="author" value= {{ request.session.user }}/> 
           </div>
+          {% endif %}
           <div class="content ele">
             <span>내용</span>
             <textarea name="contentInput" cols="50" rows="20"></textarea>

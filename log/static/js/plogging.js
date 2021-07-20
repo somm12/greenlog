@@ -1,6 +1,6 @@
 function handleOnChange(e) {
   const value = e.value;
-  const formInput = Document.querySelector("#volunteerKinds");
+  const formInput = document.querySelector("#volunteerKinds");
 
   console.log(formInput);
   if (value === "플로깅") {
