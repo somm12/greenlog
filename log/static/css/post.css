@@ -1,0 +1,36 @@
+.bodyall {
+  margin-top: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(237, 248, 223);
+  text-align: center;
+  padding: 40px;
+  width: 500px;
+  border-radius: 5%;
+}
+.ele {
+  padding: 10px;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.content > span:first-child {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.photo > input {
+  width: 180px;
+}
+
+.submit {
+  margin: 10px;
+}
