@@ -9,14 +9,13 @@ class User(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=30,default='',null=True)
-    writer =  models.ForeignKey(User ,on_delete=models.CASCADE,default='',null=True) 
+    # writer =  models.ForeignKey(User ,on_delete=models.CASCADE,default='',null=True) 
+    writer= models.CharField(max_length=10, default='')
     content = models.TextField(default='',null=True)
     image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None,null=True)
     date = models.DateTimeField(default='',null=True)
     firstPlace = models.CharField(max_length=30,default='',null=True)
     like=models.IntegerField(default=0,null=True)
-
-
 
 
 # class Comment(models.Model):
@@ -29,4 +28,3 @@ class Post(models.Model):
 #     post=models.ForeignKey(Plogging ,on_delete=models.CASCADE,default='')
 #     writer =  models.ForeignKey(User,on_delete=models.CASCADE,default='')
 #     context=models.TextField(max_length=100, default='')
-

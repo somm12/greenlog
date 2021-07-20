@@ -82,3 +82,8 @@
   margin-top: 60px;
   color: red;
 }
+
+a {
+  color: green;
+  background-color: black;
+}
