@@ -20,14 +20,18 @@ def login(request):
         return render(request, 'login.html', res_data)
         
     else:
-        user = User.objects.get(nickname = nickname)
-        if check_password(password, user.password):
-            request.session['user'] = user.nickname
-            return redirect('home')
-        else:
-            res_data['error'] = '비밀번호가 틀렸습니다.'
+        try: 
+            user = User.objects.get(nickname = nickname)
+            if check_password(password, user.password):
+                request.session['user'] = user.nickname
+                return redirect('home')
+            else:
+                res_data['error'] = '아이디와 비밀번호를 다시 확인해주세요.'
+                return render(request, 'login.html', res_data)
+        except: 
+            res_data['error'] = '아이디와 비밀번호를 다시 확인해주세요.'
             return render(request, 'login.html', res_data)
-    
+
     if user is not None:
         self.request.session['nickname'] = nickname
         login(self.request, user)
@@ -47,7 +51,10 @@ def signup(request):
             passwordcheck = request.POST['passwordcheck']
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
-
+            try:
+                print(0)
+            except print(0):
+                pass
             if not (password and passwordcheck and nickname and name):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
                 return render(request, 'signup.html', res_data)
@@ -98,16 +105,7 @@ def create(request):
     new_post.date= timezone.datetime.now()
     new_post.save()
     return render(request,'home.html')
-    # post.kinds=request.GET.get('volunteerKinds')
-    # post.title=request.GET.get('title')
-    # post.writer=request.GET.get('author')
-    # post.content=request.GET.get('contentInput')
-    # post.image=request.GET.get('images')
-    # post.firstPlace=request.GET.get('firstPlace')
-    # post.like=0;
-    # post.date=timezone.datetime.now()
-    # post.save()
-    # return render(request,'home.html')
+
 
 def post(request):
     return render(request, 'post.html')
