@@ -31,11 +31,13 @@
       </div>
     </div>
     <div class="login_make_post_box">
+      {% if request.session.user %}
       <div>
         <div class="make_post intro_btn">
           <a href="{% url 'post' %}">글쓰기</a>
         </div>
       </div>
+      {% endif %}
     </div>
   </section>
   {% endblock%}

@@ -17,7 +17,7 @@
     {%block content%}
     <div class="bodyall">
       <form
-        action="create"
+        action="{%url 'create' %}"
         enctype="multipart/form-data"
         method="POST"
         class="container"
@@ -27,7 +27,7 @@
           <label class="kinds" for="volunteerKinds">봉사 종류</label>
           <select
             id="volunteerKinds"
-            name="봉사 종류"
+            name="volunteerKinds"
             onchange="handleOnChange(this)"
           >
             <option class="plo" value="플로깅">플로깅</option>

@@ -35,6 +35,7 @@ urlpatterns = [
     path('vegetarian/',vegetarian, name="vegetarian"),
     path('gogo/',gogo, name="gogo"),
     path('logout/',logout, name="logout"),
+    path('create/',create, name="create"),
 
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

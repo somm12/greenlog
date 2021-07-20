@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
-
+from django.utils import timezone
 
 # Create your views here.
 def home(request):
@@ -102,6 +102,16 @@ def eachPlogging(request, post_id):
     return render(requst,'eachPlogging.html',{'Post':Post,'User':User})
 
 def create(request):
+    new_post = Post()
+    new_post.kinds=request.POST['volunteerKinds']
+    new_post.title=request.POST['title']
+    new_post.writer = request.POST['author']
+    new_post.content=request.POST['contentInput']
+    new_post.image=request.FILES['images']
+    new_post.firstPlace=request.POST['place']
+    new_post.like=0
+    new_post.date= timezone.datetime.now()
+    new_post.save()
     return render(request,'home.html')
 
 

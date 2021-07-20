@@ -22,7 +22,7 @@
     <div class="myprofile_img my_image">
       <img src="../static/images/somm12.jpeg" alt="" />
     </div>
-    <div class="myprofile_nickname">{{user.nickname}}님</div>
+    <div class="myprofile_nickname">{{request.session.user}}님</div>
     {% comment %} {% if count > 10 %} {% endcomment %}
     <div class="myprofile_rank">등급 : silver🪙</div>
     {% comment %} {% endif%} {% endcomment %}
@@ -68,16 +68,11 @@
   <section class="section2_mypost_activity">
     <div class="carousel-wrapper">
       <div class="owl-carousel owl-theme">
-        {% comment %} {% for i in range(0,len(myposts),2%} {% endcomment %}
         <div class="item">
-          {% comment %} <img src="myposts[i]['img'])" alt="" />
-          if len(myposts) <= i 면 밑에꺼는 출력 x
-          <img src="myposts[i+1]['img'])" alt="" /> {% endcomment %}
-
           <img src="../static/images/bibibap.jpg" alt="" />
           <img src="../static/images/salad.jpg" />
         </div>
-        {% comment %} {% endfor%} {% endcomment %}
+
         <div class="item">
           <img src="../static/images/salad2.jpg" />
           <img src="../static/images/mask_trash.jpg" />
@@ -144,8 +139,6 @@
 </div>
 <script type="text/javascript" src="/static/js/mypage.js"></script>
 <script>
-  var nickname = document.querySelector(".login_text");
-  nickname.innerHTML = "somm12님";
   $(".owl-carousel").owlCarousel({
     margin: 15,
     nav: true,
