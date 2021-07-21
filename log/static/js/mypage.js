@@ -56,6 +56,7 @@ $(document).ready(function () {
       color: "#ff0061",
     });
   }
+
   /*잔디밭 색칠하기*/
   /*
   var dates = "{{dates|safe}}"; // [월, 일 ,월, 일 ...]형식이며 두 개씩세트

@@ -82,7 +82,33 @@ def logout(request):
 
 
 def mypage(request):
-    return render(request, 'mypage.html')
+    myposts = Post.objects.order_by('-date')
+    search = request.GET.get('search')
+    if search == 'true':
+        author = request.GET.get('author')
+        myposts = Post.objects.filter(writer = author)
+        myposts_list = []#image url 추출하기
+        date = []
+        loop_counter = []
+        count = 0
+        for mypost in myposts:
+            image_url = str(mypost.image.url)
+            myposts_list.append(image_url)
+
+        for mypost in myposts:
+            count += 1
+            date.append(mypost.date.strftime("%m"))
+            date.append(mypost.date.strftime("%d"))
+        if count % 2 == 0:#짝수일때
+            for i in range(0,count//2):
+                loop_counter.append(0)
+            
+        else:
+            for i in range(0,count//2+1):
+                loop_counter.append(0)
+    
+    myposts_list = list(myposts_list)
+    return render(request, 'mypage.html',{'myposts':myposts,'dates':date,'count':count,'myposts_list':myposts_list,'loop_counter':loop_counter})
 
 
 def each(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
