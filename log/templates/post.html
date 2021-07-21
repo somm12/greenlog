@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GreenLog</title>
     <link />
-    <link rel="stylesheet" href="{% static 'css/create.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/post.css' %}" />
     <link rel="stylesheet" href='{% static "css/reset.css" %}' />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     {% endblock%}
@@ -42,12 +42,6 @@
             <span>제목</span>
             <input type="text" name="title" />
           </div>
-          {% if request.session.user %}
-          <div class="author ele">
-            <span>글쓴이</span>
-            <input type="text" name="author" value= {{ request.session.user }}/> 
-          </div>
-          {% endif %}
           <div class="content ele">
             <span>내용</span>
             <textarea name="contentInput" cols="50" rows="20"></textarea>
@@ -57,7 +51,9 @@
           </div>
           <div class="firstPlace ele">
             <span>플로깅 첫 시작 장소</span>
-            <input type="text" name="place" />
+            {%block select_location%}
+              {% include  'selectLocation.html' %}
+            {%endblock%}
           </div>
           <div>
             <input type="submit" class="submit" />
