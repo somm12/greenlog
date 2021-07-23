@@ -83,7 +83,7 @@
   color: red;
 }
 
-a {
+.bottomText > a {
   color: green;
-  background-color: black;
+  font-weight: 600;
 }
