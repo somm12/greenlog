@@ -100,7 +100,9 @@ def create(request):
     new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
     new_post.image=request.FILES.get('images')
-    new_post.firstPlace=request.POST['place']
+    place1 = request.POST["h_area1"]
+    place2 = request.POST["h_area2"]
+    new_post.firstPlace=place1+'-'+place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
