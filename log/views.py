@@ -88,7 +88,7 @@ def mypage(request):
 def each(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
     Post = get_object_or_404(Post, pk = post_id)
     User= User.objects.get(pk=Post.writer)
-    if (Post.firstPlace =="") or(Post.firstPlace==''):
+    if (Post.kinds=="플로깅" ):
         return render(request, 'eachNomal.html',{'Post':Post,'User':User})
     else :
         return render(request, 'eachPlogging.html',{'Post':Post,'User':User})
@@ -123,7 +123,9 @@ def gogo(request):
     return render(request, 'gogo.html')
 
 def vegetarian(request):
-    return render(request, 'vegetarian.html')
+    posts= []
+    posts.append(Post.objects.all().filter(kinds='채식'))
+    return render(request, 'vegetarian.html',{'posts':posts})
 
 def others(request):
     return render(request,'others.html')

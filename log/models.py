@@ -8,8 +8,8 @@ class User(models.Model):
     Member =models.CharField(max_length=10,default='')
 
 class Post(models.Model):
+    kinds=models.CharField(max_length=7, default='')
     title = models.CharField(max_length=30,default='',null=True)
-    # writer =  models.ForeignKey(User ,on_delete=models.CASCADE,default='',null=True) 
     writer= models.CharField(max_length=10, default='')
     content = models.TextField(default='',null=True)
     image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None,null=True)
