@@ -1,27 +1,37 @@
-function handleOnChange(e) {
-  const value = e.value;
+// function handleOnChange(e) {
+//   const value = e.value;
+//   const formInput = document.querySelector("#volunteerKinds");
 
-  const formInput = document.querySelector("#volunteerKinds");
+//   console.log(formInput);
+//   if (value === "플로깅") {
+//     const firstPlace = document.querySelector(".firstPlace");
+//     const newDiv = document.createElement("span");
+//     newDiv.innerHTML = "플로깅 첫 시작 장소 ";
 
-  console.log(formInput);
-  if (value === "플로깅") {
-    const firstPlace = document.querySelector(".firstPlace");
-    const newDiv = document.createElement("span");
-    newDiv.innerHTML = "플로깅 첫 시작 장소 ";
+//     const newInput = document.createElement("input");
+//     newInput.type = "text";
+//     newInput.name = "place";
 
-    const newInput = document.createElement("input");
-    newInput.type = "text";
-    newInput.name = "place";
+//     firstPlace.appendChild(newDiv);
+//     firstPlace.appendChild(newInput);
+//   } else {
+//     const e1 = document.querySelector(".firstPlace span");
+//     const e2 = document.querySelector(".firstPlace input");
 
-    firstPlace.appendChild(newDiv);
-    firstPlace.appendChild(newInput);
-  } else {
-    const e1 = document.querySelector(".firstPlace span");
-    const e2 = document.querySelector(".firstPlace input");
+//     if (e1 !== null && e2 !== null) {
+//       e1.remove();
+//       e2.remove();
+//     }
+//   }
+// }
 
-    if (e1 !== null && e2 !== null) {
-      e1.remove();
-      e2.remove();
+$(document).ready(function () {
+  $("#volunteerKinds").on("change", function () {
+    console.log(this.value);
+    if (this.value == "플로깅") {
+      $(".firstPlace").show();
+    } else {
+      $(".firstPlace").hide();
     }
-  }
-}
+  });
+});
