@@ -1,13 +1,14 @@
 /*nav-bar css start*/
+body {
+  background-color: #fafafa;
+}
+
 .header {
   height: 40px;
   background-color: #ffff;
   display: flex;
   justify-content: space-between;
   padding: 15px 25px;
-}
-body {
-  background-color: #fafafa;
 }
 
 .header-left {

@@ -17,11 +17,12 @@
     <div class="container">
       {% for post in posts.all %}
       <a href="{% url 'each' post.id %}"
-        ><img class="photo" src="{{post.image}}"
+        ><img class="photo" src="{{post.image.url}}"
       /></a>
       {% endfor %}
     </div>
     <br /><br /><br />
   </body>
+
   {%endblock%}
 </html>

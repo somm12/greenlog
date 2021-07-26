@@ -11,33 +11,30 @@
     <!--css 파일 넣는곳-->
   </head>
   <body>
-    <div class="baseWrapper">
-      <div class="header">
-        <div class="header-left">
-          <a href="{% url 'home' %}">
-            <img class="logo" src="../static/images/logo.png" alt="" />
-          </a>
-        </div>
-        <ul class="header-center">
-          <li><a href="{% url 'plogging' %}">플로깅</a></li>
-          <li><a href="{% url 'vegetarian' %}">채식</a></li>
-          <li><a href="{% url 'container' %}">용기내챌린지</a></li>
-          <li><a href="{% url 'gogo' %}">고고챌린지</a></li>
-          <li><a href="{% url 'others' %}">기타</a></li>
-        </ul>
-        <div class="header-right">
-          <div class="login_out">
-            {% if request.session.user %}
-            <a href="{% url 'mypage' %}">{{ request.session.user }}님</a> &nbsp;
-            <a href="{% url 'logout' %}">[로그아웃]</a>
-            {% else %}
-            <a href="{% url 'login' %}">로그인/가입</a>
-            {% endif %}
-          </div>
+    <div class="header">
+      <div class="header-left">
+        <a href="{% url 'home' %}">
+          <img class="logo" src="../static/images/logo.png" alt="" />
+        </a>
+      </div>
+      <ul class="header-center">
+        <li><a href="{% url 'plogging' %}">플로깅</a></li>
+        <li><a href="{% url 'vegetarian' %}">채식</a></li>
+        <li><a href="{% url 'container' %}">용기내챌린지</a></li>
+        <li><a href="{% url 'gogo' %}">고고챌린지</a></li>
+        <li><a href="{% url 'others' %}">기타</a></li>
+      </ul>
+      <div class="header-right">
+        <div class="login_out">
+          {% if request.session.user %}
+          <a href="{% url 'mypage' %}">{{ request.session.user }}님</a> &nbsp;
+          <a href="{% url 'logout' %}">[로그아웃]</a>
+          {% else %}
+          <a href="{% url 'login' %}">로그인/가입</a>
+          {% endif %}
         </div>
       </div>
-
-      {%block content%} {% endblock%}
     </div>
+    {%block content%} {% endblock%}
   </body>
 </html>
