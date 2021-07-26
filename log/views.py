@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def home(request):
@@ -86,12 +87,12 @@ def mypage(request):
 
 
 def each(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
-    Post = get_object_or_404(Post, pk = post_id)
-    User= User.objects.get(pk=Post.writer)
-    if (Post.firstPlace =="") or(Post.firstPlace==''):
-        return render(request, 'eachNomal.html',{'Post':Post,'User':User})
+    MyPost = get_object_or_404(Post, pk = post_id)
+    Me= User.objects.get(pk=MyPost.writer)
+    if (MyPost.kinds=="플로깅" ):
+        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'User':Me})
     else :
-        return render(request, 'eachPlogging.html',{'Post':Post,'User':User})
+        return render(request, 'eachNomal.html',{'MyPost':MyPost,'User':Me})
 
 def create(request):
     new_post = Post()
@@ -100,16 +101,16 @@ def create(request):
     new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
     new_post.image=request.FILES.get('images')
-    new_post.firstPlace=request.POST['place']
+    place1 = request.POST["h_area1"]
+    place2 = request.POST["h_area2"]
+    new_post.firstPlace=place1+'-'+place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
-    return render(request,'home.html')
-
+    return redirect('home')
 
 def post(request):
     return render(request, 'post.html')
-
 
 def plogging(request):
     return render(request, 'plogging.html')
@@ -121,7 +122,8 @@ def gogo(request):
     return render(request, 'gogo.html')
 
 def vegetarian(request):
-    return render(request, 'vegetarian.html')
+    posts=Post.objects.all().filter(kinds='채식')
+    return render(request, 'vegetarian.html',{'posts':posts})
 
 def others(request):
     return render(request,'others.html')

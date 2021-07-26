@@ -7,155 +7,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-    />
     <link rel="stylesheet" href='{% static "css/eachNomal.css" %}' />
     <title>GreenLog</title>
     {% endblock%}
   </head>
   <body>
     {%block content%}
-    <main class="rrrr">
-      <div class="all">
-        <div class="post">
-          <div class="carousel-wrapper">
-            <div class="owl-carousel owl-theme">
-              <div class="item">
-                {% for image in images %}
-                <img src="{{image}}" alt="" />
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <div class="elements">
-              <div class="eachheader">
-                <img
-                  class="image"
-                  src="{{User.profile}}"
-                  alt=""
-                  width="32px"
-                  height="32px"
-                />
-                <span style="display: block; margin-top: 9px"
-                  >{{User.nickname}}</span
-                >
-              </div>
-              <hr />
-              <div class="gul">
-                <div class="auth">
-                  <div>
-                    <img
-                      class="image"
-                      src="{{User.profile}}"
-                      alt=""
-                      width="32px"
-                      height="32px"
-                    />
-                    <span style="display: block; margin-top: 9px"
-                      >{{User.nickname}}</span
-                    >
-                  </div>
-                  <div class="authCont">
-                    <p>{{Post.content}}</p>
-                  </div>
-                </div>
-
-                <!-- 
-                <div class="dalcomment">
-                  <div>
-                    <img class="image" src={{"../static/images/somm12.jpeg"}}
-                    alt="" width="32px" height="32px" />
-                    <span style="display: block; margin-top: 9px">somm12</span>
-                  </div>
-                  <p>
-                    헐 정말 맛있겠네요!! 저도 채식 이제 시작했어요! 같이
-                    화이팅해봐요 ㅎㅎ
-                  </p>
-                  <div>
-                    <img
-                      class="image"
-                      src="../static/images/likelion.png"
-                      alt=""
-                      width="32px"
-                      height="32px"
-                    />
-                    <span style="display: block; margin-top: 9px"
-                      >likelion</span
-                    >
-                  </div>
-                  <p>
-                    저는 채식 1년째 진행 중인 멋쟁이 사자입니다! 처음에 너무
-                    야채, 채소만 먹으면 금방 포기하기 쉽더라구요 ㅠ 같이 오래
-                    채식합니다! 화이팅!
-                  </p>
-                </div>
-              </div>
-              -->
-
-              <hr />
-              <div class="like">
-                <img
-                  src="../static/images/heart.png"
-                  alt=""
-                  width="26px"
-                  height="24px"
-                  onclick=""
-                />
-              </div>
-              <div class="likecount">
-                <p>좋아요 30개</p>
-              </div>
-              <div class="date">
-                <p>{{Post.date}}</p>
-              </div>
-              <hr />
-              <!-- <div class="comment">
-                <div>
-                  좋아요 또는 댓글을 남기고 싶다면 <a href="#"> 로그인</a>
-                </div>
-              </div> -->
-            </div>
-          </div>
+    <div class="section">
+      <div class="container">
+        <div class="left">
+          <img src="{{MyPost.image.url}}" alt="" />
         </div>
-
-        <div class="blankBar"></div>
-        <hr />
-        <div class="another">
-          <span>#님의 게시물 더 보기</span>
+        <div class="right">
+          <div class="auth-each-header each-header">
+            <img class="image" src="{{User.profile}}" />
+            <span style="display: block; margin-top: 9px"
+              >{{User.nickname}}</span
+            >
+          </div>
+          <hr />
+          <div class="elements">
+            <div class="each-header">
+              <img class="image" src="{{User.profile}}" alt="" />
+              <span style="display: block; margin-top: 9px"
+                >{{User.nickname}}</span
+              >
+            </div>
+            <div class="content">
+              <p>{{MyPost.content}}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="like">
+            <img
+              class="like-button"
+              src="../static/images/heart.png"
+              alt=""
+              onclick=""
+            />
+            <div class="likecount">
+              <p>좋아요 {{MyPost.like}}</p>
+            </div>
+          </div>
+          <div class="date">
+            <p>{{MyPost.date}}</p>
+          </div>
+          <hr />
         </div>
       </div>
-    </main>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script>
-      $(".owl-carousel").owlCarousel({
-        margin: 15,
-        nav: true,
-        navText: [
-          "<div class='nav-button owl-prev'>‹</div>",
-          "<div class='nav-button owl-next'>›</div>",
-        ],
-        responsive: {
-          0: {
-            items: 1,
-          },
-          600: {
-            items: 2,
-          },
-          1000: {
-            items: 3,
-          },
-        },
-      });
-    </script>
+    </div>
     {% endblock %}
   </body>
 </html>
