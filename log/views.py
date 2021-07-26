@@ -89,7 +89,7 @@ def mypage(request):
         author = request.GET.get('author')
         myposts = Post.objects.filter(writer = author)
         mycount = Post.objects.filter(writer = author).count()#게시물 개수 세기
-        #회원 멤버쉽 저장
+        #회원 멤버쉽 저장 -> 수정******
         my_membership = User.objects.get(nickname = author)
         my_membership.Member = "Bronze"
         my_membership.save()
