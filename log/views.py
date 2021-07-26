@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
-
+from .models import Post
+from django.db.models import Count
 # Create your views here.
 def home(request):
     return render(request,'home.html')
@@ -88,37 +88,45 @@ def mypage(request):
     if search == 'true':
         author = request.GET.get('author')
         myposts = Post.objects.filter(writer = author)
+        mycount = Post.objects.filter(writer = author).count()#게시물 개수 세기
+        #회원 멤버쉽 저장
+        my_membership = User.objects.get(nickname = author)
+        my_membership.Member = "Bronze"
+        my_membership.save()
+        #
         myposts_list = []#image url 추출하기
-        date = []
-        loop_counter = []
-        count = 0
+        date = []# 잔디밭 구현을 위한(월,일 담은) 리스트
+        loop_counter = []#row가 2개로 나오기 때문에 for반복문 회수 미리 정함.
+        id = []# 내가 쓴 게시물로 이동을 위해 id를 담은 리스트
+        
         for mypost in myposts:
             image_url = str(mypost.image.url)
+            ids = mypost.id
+            id.append(ids)
             myposts_list.append(image_url)
 
         for mypost in myposts:
-            count += 1
             date.append(mypost.date.strftime("%m"))
             date.append(mypost.date.strftime("%d"))
-        if count % 2 == 0:#짝수일때
-            for i in range(0,count//2):
+        if mycount % 2 == 0:#짝수일때
+            for i in range(0,mycount//2):
                 loop_counter.append(0)
             
         else:
-            for i in range(0,count//2+1):
+            for i in range(0,mycount//2+1):
                 loop_counter.append(0)
     
     myposts_list = list(myposts_list)
-    return render(request, 'mypage.html',{'myposts':myposts,'dates':date,'count':count,'myposts_list':myposts_list,'loop_counter':loop_counter})
+    return render(request, 'mypage.html',{'myposts':myposts,'dates':date,'count':mycount,'myposts_list':myposts_list,'loop_counter':loop_counter,'id':id})
 
 
 def each(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
-    MyPost = get_object_or_404(Post, pk = post_id)
-    Me= User.objects.get(pk=MyPost.writer)
-    if (MyPost.kinds=="플로깅" ):
-        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'User':Me})
+    Post = get_object_or_404(Post, pk = post_id)
+    User= User.objects.get(pk=Post.writer)
+    if (Post.firstPlace =="") or(Post.firstPlace==''):
+        return render(request, 'eachNomal.html',{'Post':Post,'User':User})
     else :
-        return render(request, 'eachNomal.html',{'MyPost':MyPost,'User':Me})
+        return render(request, 'eachPlogging.html',{'Post':Post,'User':User})
 
 def create(request):
     new_post = Post()
@@ -127,16 +135,16 @@ def create(request):
     new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
     new_post.image=request.FILES.get('images')
-    place1 = request.POST["h_area1"]
-    place2 = request.POST["h_area2"]
-    new_post.firstPlace=place1+'-'+place2
+    new_post.firstPlace=request.POST['place']
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
-    return redirect('home')
+    return render(request,'home.html')
+
 
 def post(request):
     return render(request, 'post.html')
+
 
 def plogging(request):
     return render(request, 'plogging.html')
@@ -148,8 +156,7 @@ def gogo(request):
     return render(request, 'gogo.html')
 
 def vegetarian(request):
-    posts=Post.objects.all().filter(kinds='채식')
-    return render(request, 'vegetarian.html',{'posts':posts})
+    return render(request, 'vegetarian.html')
 
 def others(request):
     return render(request,'others.html')

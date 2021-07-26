@@ -71,12 +71,18 @@
       <div class="owl-carousel owl-theme">
         {% for i in loop_counter%}
         <div class="item">
-          <img class="post_image1" alt="" />
+          <a class="post_link1" href="{% url 'each' 1234%}"
+            ><img class="post_image1" alt=""
+          /></a>
           {% if not forloop.last %}
-          <img class="post_image2" alt="" />
+          <a class="post_link2" href="{% url 'each' 1234%}"
+            ><img class="post_image2" alt=""
+          /></a>
           {% endif %} {% if forloop.last and myposts|length|divisibleby:2%}
 
-          <img class="f" alt="" src="/media/None/straw.PNG" />
+          <a class="post_link2" href="{% url 'each' 1234%}"
+            ><img class="post_image2" alt="" src="/media/None/straw.PNG"
+          /></a>
           {% endif %}
         </div>
         {% endfor %}
@@ -128,53 +134,70 @@
 </script>
 <script type="text/javascript" src="/static/js/mypage.js"></script>
 <script>
-  var test = "{{myposts_list|safe}}";
-  test = test.substring(1, test.length - 1);
-  test = test.split(",");
-  var loop_count = "{{loop_counter|length}}";
-  var count = "{{count|safe}}";
+  var post_id = {{id|safe}};
+  console.log(post_id[0]);
+    var test = "{{myposts_list|safe}}";
+    test = test.substring(1, test.length - 1);
+    test = test.split(",");
+    var loop_count = "{{loop_counter|length}}";
+    var count = "{{count|safe}}";
 
-  console.log(loop_count);
-  test[0] = " " + test[0].substring(0, test[0].length);
-  console.log(test);
-  var k = 0;
-  for (var i = 1; i <= loop_count; i++) {
-    $(".item:nth-child(" + i + ") .post_image1").attr(
-      "src",
-      test[k].substring(2, test[k].length - 1)
-    );
+    console.log(loop_count);
+    test[0] = " " + test[0].substring(0, test[0].length);
+    console.log(test);
+    var k = 0;
 
-    if (test.length - 1 >= k + 1) {
-      //if문 post 개수가 홀수 일 때 array index가 초과 되지 않도록 함
-      console.log("dd");
-      $(".item:nth-child(" + i + ") .post_image2").attr(
+    for (var i = 1; i <= loop_count; i++) {
+      $(".item:nth-child(" + i + ") .post_image1").attr(
         "src",
-        test[k + 1].substring(2, test[k + 1].length - 1)
+        test[k].substring(2, test[k].length - 1)
       );
-    }
-    k += 2;
-  }
+      //mypost a href 에 url 설정
+      var post_url = $(".item:nth-child(" + i + ") .post_link1").attr(
+            'href').replace(/1234/,post_id[k].toString());
+      $(".item:nth-child(" + i + ") .post_link1").attr({
+            'href' : post_url
 
-  console.log(test[0]);
-  console.log(test[5]);
-  $(".owl-carousel").owlCarousel({
-    margin: 15,
-    nav: true,
-    navText: [
-      "<div class='nav-button owl-prev'>‹</div>",
-      "<div class='nav-button owl-next'>›</div>",
-    ],
-    responsive: {
-      0: {
-        items: 1,
+          });
+
+      if (test.length - 1 >= k + 1) {
+        //if문 post 개수가 홀수 일 때 array index가 초과 되지 않도록 함
+        console.log("dd");
+
+        $(".item:nth-child(" + i + ") .post_image2").attr(
+          "src",
+          test[k + 1].substring(2, test[k + 1].length - 1)
+        );
+        post_url = $(".item:nth-child(" + i + ") .post_link2").attr(
+            'href').replace(/1234/,post_id[k+1].toString());
+      $(".item:nth-child(" + i + ") .post_link2").attr({
+            'href' : post_url
+
+          });
+      }
+      k += 2;
+    }
+
+
+    console.log(test[5]);
+    $(".owl-carousel").owlCarousel({
+      margin: 15,
+      nav: true,
+      navText: [
+        "<div class='nav-button owl-prev'>‹</div>",
+        "<div class='nav-button owl-next'>›</div>",
+      ],
+      responsive: {
+        0: {
+          items: 1,
+        },
+        600: {
+          items: 2,
+        },
+        1000: {
+          items: 4,
+        },
       },
-      600: {
-        items: 2,
-      },
-      1000: {
-        items: 4,
-      },
-    },
-  });
+    });
 </script>
 {% endblock%}

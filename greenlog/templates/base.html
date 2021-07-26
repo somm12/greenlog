@@ -26,14 +26,16 @@
       </ul>
       <div class="header-right">
         <div class="login_out">
-
           {% if request.session.user %}
-          <a href=""{% url 'mypage' %}?search=true&author={{request.session.user}}"">{{ request.session.user }}님</a> &nbsp;
+          <a
+            href="{% url 'mypage' %}?search=true&author={{request.session.user}}"
+            >{{ request.session.user }}님</a
+          >
+          &nbsp;
           <a href="{% url 'logout' %}">[로그아웃]</a>
           {% else %}
           <a href="{% url 'login' %}">로그인/가입</a>
           {% endif %}
-
         </div>
       </div>
     </div>
