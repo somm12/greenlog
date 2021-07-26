@@ -19,6 +19,9 @@ $(document).ready(function () {
     next_level.innerHTML = "Silver";
 
     left_num.innerHTML = "까지 앞으로 " + (15 - post_count) + "개!";
+    $(".next_level").css({
+      color: "#435f7a",
+    });
     $(".left_num_text").css({
       color: "#435f7a",
     });
@@ -26,6 +29,9 @@ $(document).ready(function () {
     user_level.innerHTML = "등급 : Silver";
     next_level.innerHTML = "Gold";
     left_num.innerHTML = "까지 앞으로 " + (30 - post_count) + "개!";
+    $(".next_level").css({
+      color: "#eb9a01",
+    });
     $(".left_num_text").css({
       color: "#eb9a01",
     });
@@ -33,6 +39,9 @@ $(document).ready(function () {
     user_level.innerHTML = "등급 : Gold";
     next_level.innerHTML = "Platinum";
     left_num.innerHTML = "까지 앞으로 " + (45 - post_count) + "개!";
+    $(".next_level").css({
+      color: "#2a9e7b",
+    });
     $(".left_num_text").css({
       color: "#2a9e7b",
     });
@@ -40,6 +49,9 @@ $(document).ready(function () {
     user_level.innerHTML = "등급 : Platinum";
     next_level.innerHTML = "Diamond";
     left_num.innerHTML = "까지 앞으로 " + (60 - post_count) + "개!";
+    $(".next_level").css({
+      color: "#00b4fc",
+    });
     $(".left_num_text").css({
       color: "#00b4fc",
     });
@@ -47,6 +59,9 @@ $(document).ready(function () {
     user_level.innerHTML = "등급 : Diamond";
     next_level.innerHTML = "Ruby";
     left_num.innerHTML = "까지 앞으로 " + (75 - post_count) + "개!";
+    $(".next_level").css({
+      color: "#ff0061",
+    });
     $(".left_num_text").css({
       color: "#ff0061",
     });
@@ -54,6 +69,9 @@ $(document).ready(function () {
     user_level.innerHTML = "등급 : Ruby";
     next_level.innerHTML = "Silver";
     left_num.innerHTML = "Ruby";
+    $(".next_level").css({
+      color: "#ff0061",
+    });
     $(".left_num_text").css({
       color: "#ff0061",
     });
