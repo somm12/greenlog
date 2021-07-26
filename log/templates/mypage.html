@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {%block content%}{% load static %}
 <head>
   {% block extrahead %}
+
   <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
   <link
     rel="stylesheet"
@@ -70,12 +71,12 @@
       <div class="owl-carousel owl-theme">
         {% for i in loop_counter%}
         <div class="item">
-          <img class="fuck" alt="" />
+          <img class="post_image1" alt="" />
           {% if not forloop.last %}
-          <img class="f" alt="" />
-          {% endif %} {% if forloop.last and forloop.counter|divisibleby:2 %}
+          <img class="post_image2" alt="" />
+          {% endif %} {% if forloop.last and myposts|length|divisibleby:2%}
 
-          <img class="f" alt="" />
+          <img class="f" alt="" src="/media/None/straw.PNG" />
           {% endif %}
         </div>
         {% endfor %}
@@ -120,36 +121,42 @@
     </div>
   </section>
 </div>
+<script type="text/javascript">
+  //전역변수..
+    const post_count = {{count|safe}};
+    const dates = "{{dates|safe}}";// [월, 일 ,월, 일 ...]형식이며 두 개씩세트
+</script>
 <script type="text/javascript" src="/static/js/mypage.js"></script>
 <script>
   var test = "{{myposts_list|safe}}";
   test = test.substring(1, test.length - 1);
   test = test.split(",");
+  var loop_count = "{{loop_counter|length}}";
+  var count = "{{count|safe}}";
 
-  console.log("aa");
+  console.log(loop_count);
+  test[0] = " " + test[0].substring(0, test[0].length);
   console.log(test);
-
-  $(".item:first-child .fuck").attr(
-    "src",
-    test[0].substring(1, test[0].length - 1)
-  );
-
-  for (var i = 1; i < test.length; i += 2) {
-    $(".item:nth-child(" + i + ") .f").attr(
+  var k = 0;
+  for (var i = 1; i <= loop_count; i++) {
+    $(".item:nth-child(" + i + ") .post_image1").attr(
       "src",
-      test[i].substring(2, test[i].length - 1)
+      test[k].substring(2, test[k].length - 1)
     );
-    console.log(i);
-    if (test.length > i + 1) {
-      $(".item:nth-child(" + i + 1 + ") .fuck").attr(
+
+    if (test.length - 1 >= k + 1) {
+      //if문 post 개수가 홀수 일 때 array index가 초과 되지 않도록 함
+      console.log("dd");
+      $(".item:nth-child(" + i + ") .post_image2").attr(
         "src",
-        test[i + 1].substring(2, test[i + 1].length - 1)
+        test[k + 1].substring(2, test[k + 1].length - 1)
       );
     }
+    k += 2;
   }
 
   console.log(test[0]);
-  console.log(test[1]);
+  console.log(test[5]);
   $(".owl-carousel").owlCarousel({
     margin: 15,
     nav: true,
