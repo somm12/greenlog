@@ -16,7 +16,7 @@
     <div class="section">
       <div class="container">
         <div class="left">
-          <img src="{{MyPost.image.url}}" alt="" />
+          <img src="{{MyPost.image.url}}" style="height: 500px; width: 500px" />
         </div>
         <div class="right">
           <div class="auth-each-header each-header">
@@ -34,17 +34,24 @@
               >
             </div>
             <div class="content">
+              <p class="title">{{MyPost.title}}</p>
               <p>{{MyPost.content}}</p>
             </div>
           </div>
           <hr />
           <div class="like">
-            <img
-              class="like-button"
-              src="../static/images/heart.png"
-              alt=""
-              onclick=""
-            />
+            <form action="{% url 'yesUp' MyPost.id%}" method="POST">
+              {% csrf_token %}
+              <input
+                type="button"
+                class="like-button"
+                id="like"
+                name="like_button"
+                value="{{post.id}}"
+              />
+              <!-- <img src="../static/images/heart.png" /> -->
+            </form>
+
             <div class="likecount">
               <p>좋아요 {{MyPost.like}}</p>
             </div>

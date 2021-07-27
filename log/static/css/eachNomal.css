@@ -54,7 +54,13 @@
   /* overflow: scroll; */
 }
 
-.content > p {
+.content > p:first-child {
+  margin: 10px 0px 0px 16px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.content > p:nth-child(2) {
   line-height: 145%;
   margin: 10px 0px 0px 32px;
 }

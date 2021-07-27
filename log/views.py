@@ -100,7 +100,11 @@ def create(request):
     new_post.title=request.POST['title']
     new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
-    new_post.image=request.FILES.get('images')
+    if request.FILES.get('images') :
+        new_post.image=request.FILES.get('images')
+    else :
+        new_post.image= "../static/images/noPhoto.png"
+    print(new_post.image)
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
     new_post.firstPlace=place1+'-'+place2
@@ -129,3 +133,12 @@ def others(request):
     return render(request,'others.html')
 
 
+def yesUp(request,post_id):
+    print(post_id)
+    print("A")
+    # post = Post.objects.get(id=post_id)
+    # post.like+=1
+    # print(post.like)
+    # post.save()
+    return redirect("home")
+   
