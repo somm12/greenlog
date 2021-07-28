@@ -11,7 +11,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
   />
-  <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
+
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
 
@@ -69,7 +69,9 @@
   <section class="section2_mypost_activity">
     <div class="carousel-wrapper">
       <div class="owl-carousel owl-theme">
-        {% for i in loop_counter%}
+        {% if count is 0%}
+        <div class="no_post_mark">게시물 없음</div>
+        {% endif%} {% for i in loop_counter%}
         <div class="item">
           <a class="post_link1" href="{% url 'each' 1234%}"
             ><img class="post_image1" alt=""
@@ -130,6 +132,7 @@
 <script type="text/javascript">
   //전역변수..
     const post_count = {{count|safe}};
+    const membership = "{{membership.Member|safe}}";
     const dates = "{{dates|safe}}";// [월, 일 ,월, 일 ...]형식이며 두 개씩세트
 </script>
 <script type="text/javascript" src="/static/js/mypage.js"></script>

@@ -81,6 +81,18 @@
 }
 
 /*section2 start*/
+.owl-stage {
+  width: 100%;
+}
+.owl-item {
+  width: 100%;
+}
+.no_post_mark {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 900px;
+}
 .section2_mypost_activity {
   width: 60%;
 }

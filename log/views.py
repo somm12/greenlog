@@ -88,15 +88,26 @@ def mypage(request):
     if search == 'true':
         author = request.GET.get('author')
         myposts = Post.objects.filter(writer = author)
-        mycount = Post.objects.filter(writer = author).count()#게시물 개수 세기
+        my_postcount = Post.objects.filter(writer = author).count()#게시물 개수 세기
         #회원 멤버쉽 저장 -> 수정******
         my_membership = User.objects.get(nickname = author)
-        my_membership.Member = "Bronze"
+        if my_postcount >= 0 and my_postcount < 15:
+            my_membership.Member = "Bronze"
+        elif my_postcount >= 15 and my_postcount < 30:
+            my_membership.Member = "Silver"
+        elif my_postcount >= 30 and my_postcount < 45:
+            my_membership.Member = "Gold"
+        elif my_postcount >= 45 and my_postcount < 60:
+            my_membership.Member = "Platinum"
+        elif my_postcount >= 60 and my_postcount < 75:
+            my_membership.Member = "Diamond"
+        elif my_postcount >= 75:
+            my_membership.Member = "Ruby"      
         my_membership.save()
         #
         myposts_list = []#image url 추출하기
-        date = []# 잔디밭 구현을 위한(월,일 담은) 리스트
-        loop_counter = []#row가 2개로 나오기 때문에 for반복문 회수 미리 정함.
+        date = []# 잔디밭 구현을 위한(월,일 담을) 리스트
+        loop_counter = []#carousel row가 2개로 나오기 때문에 for반복문 횟수 미리 정함.
         id = []# 내가 쓴 게시물로 이동을 위해 id를 담은 리스트
         
         for mypost in myposts:
@@ -108,16 +119,16 @@ def mypage(request):
         for mypost in myposts:
             date.append(mypost.date.strftime("%m"))
             date.append(mypost.date.strftime("%d"))
-        if mycount % 2 == 0:#짝수일때
-            for i in range(0,mycount//2):
+        if my_postcount % 2 == 0:#짝수일때
+            for i in range(0,my_postcount//2):
                 loop_counter.append(0)
             
         else:
-            for i in range(0,mycount//2+1):
+            for i in range(0,my_postcount//2+1):
                 loop_counter.append(0)
     
     myposts_list = list(myposts_list)
-    return render(request, 'mypage.html',{'myposts':myposts,'dates':date,'count':mycount,'myposts_list':myposts_list,'loop_counter':loop_counter,'id':id})
+    return render(request, 'mypage.html',{'membership':my_membership,'dates':date,'count':my_postcount,'myposts_list':myposts_list,'loop_counter':loop_counter,'id':id})
 
 
 def each(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
