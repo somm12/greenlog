@@ -3,8 +3,8 @@ from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
-# Create your views here.
 def home(request):
     return render(request,'home.html')
 
@@ -45,7 +45,6 @@ def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
-        
             nickname = request.POST['nickname']
             name = request.POST['name']
             password = request.POST['password']
@@ -86,13 +85,36 @@ def mypage(request):
     return render(request, 'mypage.html')
 
 
-def each(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
+def each(request, post_id): 
     MyPost = get_object_or_404(Post, pk = post_id)
-    Me= User.objects.get(pk=MyPost.writer)
+    Writer= User.objects.get(pk=MyPost.writer)
+    like="false"
+    if request.method == "POST":
+        try:
+            user=request.session['user']
+            users_list=MyPost.like_users.all()
+            for users in users_list:
+                if(users.nickname == user):
+                    MyPost.like_users.remove(user)
+                    MyPost.like-=1
+                    MyPost.save()
+                    if (MyPost.kinds=="플로깅" ):
+                        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+                    else :
+                        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+            like="true"
+            MyPost.like_users.add(user)
+            MyPost.like+=1
+            MyPost.save()
+        except:
+            messages.warning(request, '로그인이 필요합니다.')
+            return redirect('login')
     if (MyPost.kinds=="플로깅" ):
-        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'User':Me})
+        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
     else :
-        return render(request, 'eachNomal.html',{'MyPost':MyPost,'User':Me})
+        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+
+
 
 def create(request):
     new_post = Post()
@@ -132,13 +154,10 @@ def vegetarian(request):
 def others(request):
     return render(request,'others.html')
 
-
 def yesUp(request,post_id):
-    print(post_id)
-    print("A")
-    # post = Post.objects.get(id=post_id)
-    # post.like+=1
-    # print(post.like)
-    # post.save()
-    return redirect("home")
+    post = Post.objects.get(id=post_id)
+    post.like+=1
+    post.save()
+    print(post.like)
+    return render(request, 'eachPlogging.html')
    

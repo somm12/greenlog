@@ -31,7 +31,6 @@ urlpatterns = [
     path('plogging/',plogging, name="plogging"),
     path('mypage/',mypage,name="mypage"),
     path('each/<int:post_id>',each,name="each"),
-    path('each/<int:post_id>',yesUp,name="yesUp"),
     path('container/',container, name="container"),
     path('vegetarian/',vegetarian, name="vegetarian"),
     path('gogo/',gogo, name="gogo"),

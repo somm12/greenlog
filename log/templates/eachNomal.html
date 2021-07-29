@@ -12,7 +12,12 @@
     {% endblock%}
   </head>
   <body>
-    {%block content%}
+    {% if messages %}
+    <div>
+      {% for message in messages %} {{ message.tags }}! {{ message.message }}
+      {%endfor %}
+    </div>
+    {% endif %} {%block content%}
     <div class="section">
       <div class="container">
         <div class="left">
@@ -20,17 +25,17 @@
         </div>
         <div class="right">
           <div class="auth-each-header each-header">
-            <img class="image" src="{{User.profile}}" />
+            <img class="image" src="{{Writer.profile}}" />
             <span style="display: block; margin-top: 9px"
-              >{{User.nickname}}</span
+              >{{Writer.nickname}}</span
             >
           </div>
           <hr />
           <div class="elements">
             <div class="each-header">
-              <img class="image" src="{{User.profile}}" alt="" />
+              <img class="image" src="{{Writer.profile}}" alt="" />
               <span style="display: block; margin-top: 9px"
-                >{{User.nickname}}</span
+                >{{Writer.nickname}}</span
               >
             </div>
             <div class="content">
@@ -40,16 +45,26 @@
           </div>
           <hr />
           <div class="like">
-            <form action="{% url 'yesUp' MyPost.id%}" method="POST">
+            <form action="{% url 'each' MyPost.id %}" method="POST">
               {% csrf_token %}
-              <input
-                type="button"
+              <button
+                type="submit"
                 class="like-button"
                 id="like"
                 name="like_button"
-                value="{{post.id}}"
-              />
-              <!-- <img src="../static/images/heart.png" /> -->
+              >
+                {%if "true" in like%}
+                <img
+                  src="../static/images/fullHeart.png"
+                  style="width: 28px; height: 28px"
+                />
+                {%else%}
+                <img
+                  src="../static/images/heart.png"
+                  style="width: 28px; height: 28px"
+                />
+                {%endif%}
+              </button>
             </form>
 
             <div class="likecount">
@@ -64,5 +79,12 @@
       </div>
     </div>
     {% endblock %}
+    <script>
+      $(document).ready(function () {
+        $(".message-clear").click(function () {
+          $(".message-wrap").fadeOut();
+        });
+      });
+    </script>
   </body>
 </html>

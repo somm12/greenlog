@@ -16,4 +16,4 @@ class Post(models.Model):
     date = models.DateTimeField(default='',null=True)
     firstPlace = models.CharField(max_length=30,default='',null=True)
     like=models.IntegerField(default=0,null=True)
-
+    like_users= models.ManyToManyField(User)
