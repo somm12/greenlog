@@ -25,7 +25,8 @@
     <div class="container">
       {% if place %} 
         {% if posts %} {% for post in posts %}
-        <img class="photo" src="{{post.image.url}}">
+        <a href="{% url 'each' post.id %}">
+        <img class="photo" src="{{post.image.url}}"></a>
         {% endfor %}{% else %}
         해당 지역 게시글이 없습니다.
         {% endif %} 
