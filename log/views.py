@@ -136,7 +136,7 @@ def create(request):
     new_post.image=request.FILES.get('images')
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
-    new_post.firstPlace=place1+'-'+place2
+    new_post.firstPlace= place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
@@ -150,7 +150,11 @@ def post(request):
 
 
 def plogging(request):
-    return render(request, 'plogging.html')
+    place =  request.GET.get("h_area2")
+    posts = Post.objects.filter(firstPlace = place).distinct()
+    if 'h_area2' in request.POST:
+        posts = Post.objects.filter(firstPlace = place).distinct()
+    return render(request, 'plogging.html',{'place':place, 'posts':posts })
 
 def container(request):
     return render(request, 'container.html')
