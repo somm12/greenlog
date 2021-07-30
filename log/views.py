@@ -44,7 +44,6 @@ def login(request):
     return redirect("home")
 
 def signup(request):
-    
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
@@ -53,13 +52,8 @@ def signup(request):
             password = request.POST['password']
             passwordcheck = request.POST['passwordcheck']
             profile = request.POST['profile']
-            
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
-            try:
-                print(0)
-            except print(0):
-                pass
             if not (password and passwordcheck and nickname and name and profile):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
                 return render(request, 'signup.html', res_data)
@@ -76,7 +70,6 @@ def signup(request):
                     password = make_password(password),
                     profile = profile,
                 )
-
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})
     return render(request, 'signup.html')
@@ -85,7 +78,6 @@ def logout(request):
     if request.session.get('user'):
         del(request.session['user'])
     return redirect('home')
-
 
 def mypage(request):
     myposts = Post.objects.order_by('-date')
@@ -109,7 +101,7 @@ def mypage(request):
         elif my_postcount >= 75:
             my_membership.Member = "Ruby"      
         my_membership.save()
-        #
+        
         myposts_list = []#image url 추출하기
         date = []# 잔디밭 구현을 위한(월,일 담을) 리스트
         loop_counter = []#carousel row가 2개로 나오기 때문에 for반복문 횟수 미리 정함.
@@ -165,10 +157,15 @@ def each(request, post_id):
     else :
         return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
 
+def post(request):
+    return render(request, 'post.html')
+
+
 def create(request):
     new_post = Post()
-    new_post.writer=request.session['user']
     new_post.kinds=request.POST['volunteerKinds']
+    new_post.title=request.POST['title']
+    new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
     if request.FILES.get('images') :
         new_post.image=request.FILES.get('images')
@@ -177,15 +174,11 @@ def create(request):
     print(new_post.image)
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
-    new_post.firstPlace= place2
+    new_post.firstPlace=place1+'-'+place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
     return redirect('home')
-
-
-def post(request):
-    return render(request, 'post.html')
 
 
 def plogging(request):

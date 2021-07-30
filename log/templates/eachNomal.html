@@ -12,12 +12,7 @@
     {% endblock%}
   </head>
   <body>
-    {% if messages %}
-    <div>
-      {% for message in messages %} {{ message.tags }}! {{ message.message }}
-      {%endfor %}
-    </div>
-    {% endif %} {%block content%}
+    {%block content%}
     <div class="section">
       <div class="container">
         <div class="left">
@@ -25,7 +20,7 @@
         </div>
         <div class="right">
           <div class="auth-each-header each-header">
-            <img class="image" src="{{Writer.profile}}" />
+            <img class="image" src="{{Writer.profile.url}}" />
             <span style="display: block; margin-top: 9px"
               >{{Writer.nickname}}</span
             >
@@ -46,35 +41,38 @@
           <hr />
           <div class="like">
             <form action="{% url 'each' MyPost.id %}" method="POST">
-              {% csrf_token %}
+              {% csrf_token %} 
+              </div>
               <button
                 type="submit"
                 class="like-button"
                 id="like"
                 name="like_button"
               >
-                {%if "true" in like%}
-                <img
-                  src="../static/images/fullHeart.png"
-                  style="width: 28px; height: 28px"
-                />
-                {%else%}
-                <img
-                  src="../static/images/heart.png"
-                  style="width: 28px; height: 28px"
-                />
-                {%endif%}
+                <div class="button-inner">
+                  {%if "true" in like%}
+                  <img
+                    src="../static/images/fullHeart.png"
+                    style="width: 100%; height: 100%"
+                  />
+                  {%else%}
+                  <img
+                    src="../static/images/heart.png"
+                    style="width: 100%; height: 100%"
+                  />
+                  {%endif%}
+                </div>
               </button>
             </form>
 
             <div class="likecount">
               <p>좋아요 {{MyPost.like}}</p>
             </div>
-          </div>
           <div class="date">
             <p>{{MyPost.date}}</p>
           </div>
-          <hr />
+           <hr />
+          </div>
         </div>
       </div>
     </div>
