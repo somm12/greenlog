@@ -52,9 +52,8 @@ def signup(request):
             name = request.POST['name']
             password = request.POST['password']
             passwordcheck = request.POST['passwordcheck']
-            profile = request.FILES.get('profile')
+            profile = request.FILES['profile']
             
-
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
             try:
                 print(0)
@@ -76,6 +75,7 @@ def signup(request):
                     password = make_password(password),
                     profile = profile,
                 )
+                
 
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})

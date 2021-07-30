@@ -6,7 +6,12 @@
 </head>
 
 <body class="body" width="100%" height="100%">
-  <form action="." method="POST" class="loginform">
+  <form
+    action="."
+    method="POST"
+    class="loginform"
+    enctype="multipart/form-data"
+  >
     {% csrf_token %}
     <h1>Sign up</h1>
     <div class="nameform">
@@ -46,8 +51,9 @@
       />
     </div>
     <div class="photo">
-      <p class="word">Profile </p><input type="file" name="profile" id="profile" />
-     </div>
+      <p class="word">Profile</p>
+      <input type="file" name="profile" id="profile" class="profile" />
+    </div>
 
     <button type="submit" class="btn">sign up!!</button>
     <div class="error">{{ error }}</div>
