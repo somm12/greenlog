@@ -12,39 +12,61 @@
     {% endblock%}
   </head>
   <body>
-    {%block content%}
+    {% if messages %}
+    <div>
+      {% for message in messages %} {{ message.tags }}! {{ message.message }}
+      {%endfor %}
+    </div>
+    {% endif %} {%block content%}
     <div class="section">
       <div class="container">
         <div class="left">
-          <img src="{{MyPost.image.url}}" alt="" />
+          <img src="{{MyPost.image.url}}" style="height: 500px; width: 500px" />
         </div>
         <div class="right">
           <div class="auth-each-header each-header">
-            <img class="image" src="{{User.profile}}" />
+            <img class="image" src="{{Writer.profile}}" />
             <span style="display: block; margin-top: 9px"
-              >{{User.nickname}}</span
+              >{{Writer.nickname}}</span
             >
           </div>
           <hr />
           <div class="elements">
             <div class="each-header">
-              <img class="image" src="{{User.profile}}" alt="" />
+              <img class="image" src="{{Writer.profile}}" alt="" />
               <span style="display: block; margin-top: 9px"
-                >{{User.nickname}}</span
+                >{{Writer.nickname}}</span
               >
             </div>
             <div class="content">
+              <p class="title">{{MyPost.title}}</p>
               <p>{{MyPost.content}}</p>
             </div>
           </div>
           <hr />
           <div class="like">
-            <img
-              class="like-button"
-              src="../static/images/heart.png"
-              alt=""
-              onclick=""
-            />
+            <form action="{% url 'each' MyPost.id %}" method="POST">
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="like-button"
+                id="like"
+                name="like_button"
+              >
+                {%if "true" in like%}
+                <img
+                  src="../static/images/fullHeart.png"
+                  style="width: 28px; height: 28px"
+                />
+                {%else%}
+                <img
+                  src="../static/images/heart.png"
+                  style="width: 28px; height: 28px"
+                />
+                {%endif%}
+              </button>
+            </form>
+
             <div class="likecount">
               <p>좋아요 {{MyPost.like}}</p>
             </div>
@@ -57,5 +79,12 @@
       </div>
     </div>
     {% endblock %}
+    <script>
+      $(document).ready(function () {
+        $(".message-clear").click(function () {
+          $(".message-wrap").fadeOut();
+        });
+      });
+    </script>
   </body>
 </html>

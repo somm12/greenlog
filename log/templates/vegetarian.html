@@ -16,9 +16,9 @@
   <body>
     <div class="container">
       {% for post in posts.all %}
-      <a href="{% url 'each' post.id %}"
-        ><img class="photo" src="{{post.image.url}}"
-      /></a>
+      <a href="{% url 'each' post.id %}">
+        <img class="photo" src="{{post.image.url}}" />
+      </a>
       {% endfor %}
     </div>
     <br /><br /><br />

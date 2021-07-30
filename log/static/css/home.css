@@ -2,9 +2,11 @@
 .home_body {
   z-index: 1;
 }
+
 .home_body::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
+
 .main_page {
   height: 100vh;
   display: flex;
@@ -16,6 +18,7 @@
 .main_logo img {
   width: 300px;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -24,6 +27,7 @@
     opacity: 1;
   }
 }
+
 .greenlog_back_img {
   z-index: -1;
   position: absolute;

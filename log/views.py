@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
+
 from .models import Post
 from django.db.models import Count
 
-# Create your views here.
+
 def home(request):
     return render(request,'home.html')
 
@@ -47,7 +48,6 @@ def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
-        
             nickname = request.POST['nickname']
             name = request.POST['name']
             password = request.POST['password']
@@ -136,18 +136,44 @@ def mypage(request):
     return render(request, 'mypage.html',{'membership':my_membership,'dates':date,'count':my_postcount,'myposts_list':myposts_list,'loop_counter':loop_counter,'id':id})
 
 
-def each(request,post_id):   #일반 게시물 가져와서 eachView로 보여주기
+def each(request, post_id): 
     MyPost = get_object_or_404(Post, pk = post_id)
-    Me= User.objects.get(pk=MyPost.writer)
+    Writer= User.objects.get(pk=MyPost.writer)
+    like="false"
+    if request.method == "POST":
+        try:
+            user=request.session['user']
+            users_list=MyPost.like_users.all()
+            for users in users_list:
+                if(users.nickname == user):
+                    MyPost.like_users.remove(user)
+                    MyPost.like-=1
+                    MyPost.save()
+                    if (MyPost.kinds=="플로깅" ):
+                        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+                    else :
+                        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+            like="true"
+            MyPost.like_users.add(user)
+            MyPost.like+=1
+            MyPost.save()
+        except:
+            messages.warning(request, '로그인이 필요합니다.')
+            return redirect('login')
     if (MyPost.kinds=="플로깅" ):
-        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'User':Me})
-    else:
-        return render(request, 'eachNomal.html',{'MyPost':MyPost,'User':Me})
+        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+    else :
+        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+
 def create(request):
     new_post = Post()
     new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
-    new_post.image=request.FILES.get('images')
+    if request.FILES.get('images') :
+        new_post.image=request.FILES.get('images')
+    else :
+        new_post.image= "../static/images/noPhoto.png"
+    print(new_post.image)
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
     new_post.firstPlace= place2

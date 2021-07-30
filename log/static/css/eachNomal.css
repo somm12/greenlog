@@ -54,7 +54,13 @@
   /* overflow: scroll; */
 }
 
-.content > p {
+.content > p:first-child {
+  margin: 10px 0px 0px 16px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.content > p:nth-child(2) {
   line-height: 145%;
   margin: 10px 0px 0px 32px;
 }
@@ -66,9 +72,13 @@
 
 .like-button {
   height: 30px;
-  width: 30px;
+  width: 31px;
   margin: 8px 16px;
+  padding: 0;
   box-sizing: border-box;
+  cursor: pointer;
+  outline: 0;
+  /* border: px; */
 }
 
 .likecount {
@@ -93,4 +103,32 @@ hr {
 .img {
   width: 100%;
   border-radius: 70%;
+}
+
+.message-wrap {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  margin-top: 80px;
+  width: 360px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  border: 2px solid red;
+  text-align: center;
+}
+
+.message-tag {
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.message-content {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.message-clear {
+  font-size: 12px;
 }
