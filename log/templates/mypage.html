@@ -2,7 +2,6 @@
 <head>
   {% block extrahead %}
 
-  <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -11,7 +10,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
   />
-
+  <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
 
@@ -21,7 +20,7 @@
   <section class="section1_profile">
     <!-- 파이썬으로 img, nickname 가져오기 -->
     <div class="myprofile_img my_image">
-      <img src="../static/images/somm12.jpeg" alt="" />
+      <img src="/static/images/{{membership.profile}}" alt="" />
     </div>
     <div class="myprofile_nickname">{{request.session.user}}님</div>
     {% comment %} {% if count > 10 %} {% endcomment %}
@@ -80,12 +79,12 @@
           <a class="post_link2" href="{% url 'each' 1234%}"
             ><img class="post_image2" alt=""
           /></a>
-          {% endif %} {% if forloop.last and myposts|length|divisibleby:2%}
-
+          {% endif %} {% if forloop.last and myposts|length|divisibleby:2 %}
+          {%if count > 1 and count|divisibleby:2%}
           <a class="post_link2" href="{% url 'each' 1234%}"
-            ><img class="post_image2" alt="" src="/media/None/straw.PNG"
+            ><img class="post_image2" alt=""
           /></a>
-          {% endif %}
+          {% endif %} {% endif %}
         </div>
         {% endfor %}
       </div>

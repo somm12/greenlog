@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from .models import Post
 from django.db.models import Count
+
 # Create your views here.
 def home(request):
     return render(request,'home.html')
@@ -42,6 +43,7 @@ def login(request):
     return redirect("home")
 
 def signup(request):
+    
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
@@ -51,6 +53,7 @@ def signup(request):
             password = request.POST['password']
             passwordcheck = request.POST['passwordcheck']
             profile = request.POST['profile']
+            
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
             try:
@@ -175,5 +178,8 @@ def vegetarian(request):
 
 def others(request):
     return render(request,'others.html')
+
+
+
 
 
