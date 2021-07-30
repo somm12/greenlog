@@ -60,7 +60,7 @@ def signup(request):
                 print(0)
             except print(0):
                 pass
-            if not (password and passwordcheck and nickname and name):
+            if not (password and passwordcheck and nickname and name and profile):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
                 return render(request, 'signup.html', res_data)
             elif password != passwordcheck:
@@ -168,6 +168,7 @@ def each(request, post_id):
 def create(request):
     new_post = Post()
     new_post.writer=request.session['user']
+    new_post.kinds=request.POST['volunteerKinds']
     new_post.content=request.POST['contentInput']
     if request.FILES.get('images') :
         new_post.image=request.FILES.get('images')
@@ -191,23 +192,25 @@ def post(request):
 
 def plogging(request):
     place =  request.GET.get("h_area2")
-    posts = Post.objects.filter(firstPlace = place).distinct()
+    posts = Post.objects.filter(kinds='플로깅',firstPlace = place).distinct()
     if 'h_area2' in request.POST:
         posts = Post.objects.filter(firstPlace = place).distinct()
     return render(request, 'plogging.html',{'place':place, 'posts':posts })
 
 def container(request):
-    return render(request, 'container.html')
-
+    posts=Post.objects.all().filter(kinds='용기내').distinct()
+    return render(request, 'container.html',{'posts':posts})
 def gogo(request):
-    return render(request, 'gogo.html')
+    posts=Post.objects.all().filter(kinds='고고').distinct()
+    return render(request, 'gogo.html',{'posts':posts})
 
 def vegetarian(request):
-    posts=Post.objects.all().filter(kinds='채식')
+    posts=Post.objects.all().filter(kinds='채식').distinct()
     return render(request, 'vegetarian.html',{'posts':posts})
 
 def others(request):
-    return render(request,'others.html')
+    posts=Post.objects.all().filter(kinds='기타').distinct()
+    return render(request, 'others.html',{'posts':posts})
 
 
 
