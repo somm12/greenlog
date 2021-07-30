@@ -2,7 +2,6 @@
 <head>
   {% block extrahead %}
 
-  <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -21,7 +20,7 @@
   <section class="section1_profile">
     <!-- 파이썬으로 img, nickname 가져오기 -->
     <div class="myprofile_img my_image">
-      <img src="../static/images/somm12.jpeg" alt="" />
+      <img src="/static/images/{{membership.profile}}" alt="" />
     </div>
     <div class="myprofile_nickname">{{request.session.user}}님</div>
     {% comment %} {% if count > 10 %} {% endcomment %}
@@ -69,7 +68,9 @@
   <section class="section2_mypost_activity">
     <div class="carousel-wrapper">
       <div class="owl-carousel owl-theme">
-        {% for i in loop_counter%}
+        {% if count is 0%}
+        <div class="no_post_mark">게시물 없음</div>
+        {% endif%} {% for i in loop_counter%}
         <div class="item">
           <a class="post_link1" href="{% url 'each' 1234%}"
             ><img class="post_image1" alt=""
@@ -78,12 +79,12 @@
           <a class="post_link2" href="{% url 'each' 1234%}"
             ><img class="post_image2" alt=""
           /></a>
-          {% endif %} {% if forloop.last and myposts|length|divisibleby:2%}
-
+          {% endif %} {% if forloop.last and myposts|length|divisibleby:2 %}
+          {%if count > 1 and count|divisibleby:2%}
           <a class="post_link2" href="{% url 'each' 1234%}"
-            ><img class="post_image2" alt="" src="/media/None/straw.PNG"
+            ><img class="post_image2" alt=""
           /></a>
-          {% endif %}
+          {% endif %} {% endif %}
         </div>
         {% endfor %}
       </div>
@@ -130,6 +131,7 @@
 <script type="text/javascript">
   //전역변수..
     const post_count = {{count|safe}};
+    const membership = "{{membership.Member|safe}}";
     const dates = "{{dates|safe}}";// [월, 일 ,월, 일 ...]형식이며 두 개씩세트
 </script>
 <script type="text/javascript" src="/static/js/mypage.js"></script>

@@ -73,7 +73,7 @@
   font-size: 20px;
   text-align: center;
   margin-bottom: 20px;
-  color: #435f7a;
+
   font-weight: 600;
 }
 .left_num_text {
@@ -81,6 +81,18 @@
 }
 
 /*section2 start*/
+.owl-stage {
+  width: 100%;
+}
+.owl-item {
+  width: 100%;
+}
+.no_post_mark {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 800px;
+}
 .section2_mypost_activity {
   width: 60%;
 }

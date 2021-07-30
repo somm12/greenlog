@@ -14,66 +14,40 @@ $(document).ready(function () {
   var next_level = document.querySelector(".next_level");
   var left_num = document.querySelector(".left_num_text");
 
+  user_level.innerHTML = "등급 : " + membership;
+  next_level.innerHTML = "다음등급";
   if (post_count >= 0 && post_count < 15) {
-    user_level.innerHTML = "등급 : Bronze";
-    next_level.innerHTML = "Silver";
-
     left_num.innerHTML = "까지 앞으로 " + (15 - post_count) + "개!";
-    $(".next_level").css({
-      color: "#435f7a",
-    });
-    $(".left_num_text").css({
-      color: "#435f7a",
+    $(".myprofile_rank").css({
+      color: "#AD5600",
     });
   } else if (post_count >= 15 && post_count < 30) {
-    user_level.innerHTML = "등급 : Silver";
-    next_level.innerHTML = "Gold";
     left_num.innerHTML = "까지 앞으로 " + (30 - post_count) + "개!";
-    $(".next_level").css({
-      color: "#eb9a01",
-    });
-    $(".left_num_text").css({
-      color: "#eb9a01",
+
+    $(".myprofile_rank").css({
+      color: "#435F7A",
     });
   } else if (post_count >= 30 && post_count < 45) {
-    user_level.innerHTML = "등급 : Gold";
-    next_level.innerHTML = "Platinum";
     left_num.innerHTML = "까지 앞으로 " + (45 - post_count) + "개!";
-    $(".next_level").css({
-      color: "#2a9e7b",
-    });
-    $(".left_num_text").css({
-      color: "#2a9e7b",
+    $(".myprofile_rank").css({
+      color: "#EA9A01",
     });
   } else if (post_count >= 45 && post_count < 60) {
-    user_level.innerHTML = "등급 : Platinum";
-    next_level.innerHTML = "Diamond";
     left_num.innerHTML = "까지 앞으로 " + (60 - post_count) + "개!";
-    $(".next_level").css({
-      color: "#00b4fc",
-    });
-    $(".left_num_text").css({
-      color: "#00b4fc",
+
+    $(".myprofile_rank").css({
+      color: " #3CA382",
     });
   } else if (post_count >= 60 && post_count < 75) {
-    user_level.innerHTML = "등급 : Diamond";
-    next_level.innerHTML = "Ruby";
     left_num.innerHTML = "까지 앞으로 " + (75 - post_count) + "개!";
-    $(".next_level").css({
-      color: "#ff0061",
-    });
-    $(".left_num_text").css({
-      color: "#ff0061",
+    $(".myprofile_rank").css({
+      color: "#00B4FC",
     });
   } else if (post_count >= 75) {
-    user_level.innerHTML = "등급 : Ruby";
-    next_level.innerHTML = "Silver";
     left_num.innerHTML = "Ruby";
-    $(".next_level").css({
-      color: "#ff0061",
-    });
-    $(".left_num_text").css({
-      color: "#ff0061",
+
+    $(".myprofile_rank").css({
+      color: "#FF0060",
     });
   }
   console.log(dates);
