@@ -11,15 +11,11 @@
 </head>
 <body>
     <div class="container">
-        <img class="photo" src="../static/images/no_label.PNG">
-        <img class="photo" src="../static/images/shampoo.PNG">
-        <img class="photo" src="../static/images/straw.PNG">
-        <img class="photo" src="../static/images/shampoo.PNG">
-        <img class="photo" src="../static/images/no_label.PNG">
-        <img class="photo" src="../static/images/straw.PNG">
-        <img class="photo" src="../static/images/straw.PNG">
-        <img class="photo" src="../static/images/shampoo.PNG">
-        <img class="photo" src="../static/images/no_label.PNG">
+        {% for post in posts.all %}
+      <a href="{% url 'each' post.id %}">
+        <img class="photo" src="{{post.image.url}}" />
+      </a>
+      {% endfor %}
     </div>
     <br><br><br>
 </body>
