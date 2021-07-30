@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
-from django.contrib import messages
+from .models import Post
+from django.db.models import Count
+
 
 def home(request):
     return render(request,'home.html')
@@ -42,6 +43,7 @@ def login(request):
     return redirect("home")
 
 def signup(request):
+    
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
@@ -49,6 +51,8 @@ def signup(request):
             name = request.POST['name']
             password = request.POST['password']
             passwordcheck = request.POST['passwordcheck']
+            profile = request.POST['profile']
+            
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
             try:
@@ -69,6 +73,7 @@ def signup(request):
                     nickname = nickname,
                     name = name,
                     password = make_password(password),
+                    profile = profile,
                 )
 
                 user.save() #데이터베이스에 저장
@@ -78,11 +83,56 @@ def signup(request):
 def logout(request):
     if request.session.get('user'):
         del(request.session['user'])
-    return redirect('home.html')
+    return redirect('home')
 
 
 def mypage(request):
-    return render(request, 'mypage.html')
+    myposts = Post.objects.order_by('-date')
+    search = request.GET.get('search')
+    if search == 'true':
+        author = request.GET.get('author')
+        myposts = Post.objects.filter(writer = author)
+        my_postcount = Post.objects.filter(writer = author).count()#게시물 개수 세기
+        #회원 멤버쉽 저장 -> 수정******
+        my_membership = User.objects.get(nickname = author)
+        if my_postcount >= 0 and my_postcount < 15:
+            my_membership.Member = "Bronze"
+        elif my_postcount >= 15 and my_postcount < 30:
+            my_membership.Member = "Silver"
+        elif my_postcount >= 30 and my_postcount < 45:
+            my_membership.Member = "Gold"
+        elif my_postcount >= 45 and my_postcount < 60:
+            my_membership.Member = "Platinum"
+        elif my_postcount >= 60 and my_postcount < 75:
+            my_membership.Member = "Diamond"
+        elif my_postcount >= 75:
+            my_membership.Member = "Ruby"      
+        my_membership.save()
+        #
+        myposts_list = []#image url 추출하기
+        date = []# 잔디밭 구현을 위한(월,일 담을) 리스트
+        loop_counter = []#carousel row가 2개로 나오기 때문에 for반복문 횟수 미리 정함.
+        id = []# 내가 쓴 게시물로 이동을 위해 id를 담은 리스트
+        
+        for mypost in myposts:
+            image_url = str(mypost.image.url)
+            ids = mypost.id
+            id.append(ids)
+            myposts_list.append(image_url)
+
+        for mypost in myposts:
+            date.append(mypost.date.strftime("%m"))
+            date.append(mypost.date.strftime("%d"))
+        if my_postcount % 2 == 0:#짝수일때
+            for i in range(0,my_postcount//2):
+                loop_counter.append(0)
+            
+        else:
+            for i in range(0,my_postcount//2+1):
+                loop_counter.append(0)
+    
+    myposts_list = list(myposts_list)
+    return render(request, 'mypage.html',{'membership':my_membership,'dates':date,'count':my_postcount,'myposts_list':myposts_list,'loop_counter':loop_counter,'id':id})
 
 
 def each(request, post_id): 
@@ -114,12 +164,8 @@ def each(request, post_id):
     else :
         return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
 
-
-
 def create(request):
     new_post = Post()
-    new_post.kinds=request.POST['volunteerKinds']
-    new_post.title=request.POST['title']
     new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
     if request.FILES.get('images') :
@@ -129,17 +175,25 @@ def create(request):
     print(new_post.image)
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
-    new_post.firstPlace=place1+'-'+place2
+    new_post.firstPlace= place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
+
+
     return redirect('home')
+
 
 def post(request):
     return render(request, 'post.html')
 
+
 def plogging(request):
-    return render(request, 'plogging.html')
+    place =  request.GET.get("h_area2")
+    posts = Post.objects.filter(firstPlace = place).distinct()
+    if 'h_area2' in request.POST:
+        posts = Post.objects.filter(firstPlace = place).distinct()
+    return render(request, 'plogging.html',{'place':place, 'posts':posts })
 
 def container(request):
     return render(request, 'container.html')
@@ -154,10 +208,3 @@ def vegetarian(request):
 def others(request):
     return render(request,'others.html')
 
-def yesUp(request,post_id):
-    post = Post.objects.get(id=post_id)
-    post.like+=1
-    post.save()
-    print(post.like)
-    return render(request, 'eachPlogging.html')
-   

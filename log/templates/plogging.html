@@ -20,17 +20,17 @@
         {%endblock%}
       </div>
       <button class="btn">검색</button>
+    </form>
     </div>
     <div class="container">
-      <img class="photo" src="../static/images/plastic_trash2.jpg" />
-      <img class="photo" src="../static/images/garbage_can.jpg" />
-      <img class="photo" src="../static/images/mask_trash.jpg" />
-      <img class="photo" src="../static/images/garbage_can.jpg" />
-      <img class="photo" src="../static/images/plastic_trash2.jpg" />
-      <img class="photo" src="../static/images/mask_trash.jpg" />
-      <img class="photo" src="../static/images/mask_trash.jpg" />
-      <img class="photo" src="../static/images/garbage_can.jpg" />
-      <img class="photo" src="../static/images/plastic_trash2.jpg" />
+      {% if place %} 
+        {% if posts %} {% for post in posts %}
+        <a href="{% url 'each' post.id %}">
+        <img class="photo" src="{{post.image.url}}"></a>
+        {% endfor %}{% else %}
+        해당 지역 게시글이 없습니다.
+        {% endif %} 
+        {% endif %}
     </div>
     <br /><br /><br />
   </body>

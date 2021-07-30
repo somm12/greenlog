@@ -1,4 +1,4 @@
-#!/Users/sominan/멋쟁이사자처럼🦁/greenLog/myvenv/bin/python3
+#!/Users/sominan/멋쟁이사자처럼🦁/greenLog/myvenv/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

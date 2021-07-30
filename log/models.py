@@ -4,7 +4,7 @@ class User(models.Model):
     name = models.CharField(max_length=10,default='')
     nickname = models.CharField(max_length=10,primary_key=True)
     password =models.CharField(max_length=30,default='')
-    profile = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
+    profile = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None, blank=True, null=True)
     Member =models.CharField(max_length=10,default='')
 
 class Post(models.Model):
