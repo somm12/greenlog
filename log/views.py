@@ -44,7 +44,7 @@ def login(request):
     return redirect("home")
 
 def signup(request):
-    
+   
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
@@ -52,7 +52,7 @@ def signup(request):
             name = request.POST['name']
             password = request.POST['password']
             passwordcheck = request.POST['passwordcheck']
-            profile = request.POST['profile']
+            profile = request.FILES.get('profile')
             
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)

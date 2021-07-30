@@ -20,7 +20,7 @@
   <section class="section1_profile">
     <!-- 파이썬으로 img, nickname 가져오기 -->
     <div class="myprofile_img my_image">
-      <img src="/static/images/{{membership.profile}}" alt="" />
+      <img src="{{ membership.profile.url }}" alt="" />
     </div>
     <div class="myprofile_nickname">{{request.session.user}}님</div>
     {% comment %} {% if count > 10 %} {% endcomment %}
