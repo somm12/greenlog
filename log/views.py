@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from .models import Post
 from django.db.models import Count
+from django.contrib import messages
 
 
 def home(request):
@@ -179,8 +180,6 @@ def create(request):
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
-
-
     return redirect('home')
 
 
