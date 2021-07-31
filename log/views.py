@@ -141,10 +141,7 @@ def each(request, post_id):
                     MyPost.like_users.remove(user)
                     MyPost.like-=1
                     MyPost.save()
-                    if (MyPost.kinds=="플로깅" ):
-                        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
-                    else :
-                        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+                    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
             like="true"
             MyPost.like_users.add(user)
             MyPost.like+=1
@@ -152,10 +149,7 @@ def each(request, post_id):
         except:
             messages.warning(request, '로그인이 필요합니다.')
             return redirect('login')
-    if (MyPost.kinds=="플로깅" ):
-        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
-    else :
-        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
 
 def post(request):
     return render(request, 'post.html')

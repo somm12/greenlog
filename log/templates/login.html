@@ -1,8 +1,18 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <head>
+  {% block extrahead %}
   <title>login</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
   <link rel="stylesheet" href='{% static "css/reset.css" %}' />
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(".message-clear").click(function () {
+        $(".message-wrap").fadeOut();
+      });
+    });
+  </script>
+  {% endblock%}
 </head>
 
 <body class="body" width="100%" height="100%">
@@ -33,5 +43,14 @@
     </div>
     <div class="error">{{ error }}</div>
   </form>
+  {% if messages %}
+  <div class="message-wrap">
+    {% for message in messages %}
+    <div class="message-tag">※ {{message.tags}} ※</div>
+    <div class="message-content">{{message.message}}</div>
+    {% endfor %}
+    <input class="message-clear" type="button" value="확인" />
+  </div>
+  {% endif %}
 </body>
 {% endblock %}

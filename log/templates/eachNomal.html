@@ -6,7 +6,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href='{% static "css/eachNomal.css" %}' />
     <title>GreenLog</title>
     {% endblock%}
@@ -41,8 +40,7 @@
           <hr />
           <div class="like">
             <form action="{% url 'each' MyPost.id %}" method="POST">
-              {% csrf_token %} 
-              </div>
+              {% csrf_token %}
               <button
                 type="submit"
                 class="like-button"
@@ -68,21 +66,14 @@
             <div class="likecount">
               <p>좋아요 {{MyPost.like}}</p>
             </div>
+          </div>
           <div class="date">
             <p>{{MyPost.date}}</p>
           </div>
-           <hr />
-          </div>
+          <hr />
         </div>
       </div>
     </div>
     {% endblock %}
-    <script>
-      $(document).ready(function () {
-        $(".message-clear").click(function () {
-          $(".message-wrap").fadeOut();
-        });
-      });
-    </script>
   </body>
 </html>
