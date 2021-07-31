@@ -208,9 +208,15 @@ def vegetarian(request):
     posts=Post.objects.all().filter(kinds='채식').distinct()
     return render(request, 'vegetarian.html',{'posts':posts})
 
+
 def others(request):
     posts=Post.objects.all().filter(kinds='기타').distinct()
     return render(request, 'others.html',{'posts':posts})
+def edit_profile(request,user):
+    user_profile = User.objects.get(nickname=user)
+    user_profile.profile = request.FILES['profile']
+    user_profile.save()
+    return redirect('/mypage/?search=true&author=' + str(user_profile.nickname))
 
 
 

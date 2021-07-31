@@ -36,6 +36,7 @@ urlpatterns = [
     path('gogo/',gogo, name="gogo"),
     path('logout/',logout, name="logout"),
     path('create/',create, name="create"),
+    path('edit_profile/<str:user>',edit_profile, name="edit_profile"),
 
 
     
