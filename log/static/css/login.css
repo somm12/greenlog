@@ -4,35 +4,6 @@
   text-decoration: none;
 }
 
-.message-wrap {
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  position: absolute;
-  margin-top: 80px;
-  width: 360px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 10px;
-  border: 2px solid red;
-  text-align: center;
-}
-
-.message-tag {
-  color: red;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.message-content {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.message-clear {
-  font-size: 12px;
-}
-
 .body {
   background-color: white;
 }
@@ -118,4 +89,33 @@
 .bottomText > a {
   color: green;
   font-weight: 600;
+}
+
+.message-wrap {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  margin-top: 30px;
+  width: 360px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  border: 2px solid green;
+  text-align: center;
+}
+
+.message-tag {
+  color: green;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.message-content {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.message-clear {
+  font-size: 12px;
 }

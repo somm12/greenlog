@@ -76,11 +76,12 @@
   line-height: 30px;
 }
 .login_make_post_box {
+  display: flex;
+  justify-content: flex-end;
   margin-top: 10px;
 }
 .login_make_post_box > div {
-  display: flex;
-  justify-content: flex-end;
+  width: 80px;
 }
 .login_make_post_box .login {
   margin-right: 10px;
@@ -89,6 +90,7 @@
   padding: 15px;
   border-radius: 8px;
   background-color: rgb(174, 216, 123);
+  cursor: pointer;
 }
 .login_make_post_box .login a {
   text-decoration: none;

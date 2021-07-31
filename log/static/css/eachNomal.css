@@ -109,32 +109,3 @@ hr {
   width: 100%;
   border-radius: 70%;
 }
-
-.message-wrap {
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  position: absolute;
-  margin-top: 80px;
-  width: 360px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 10px;
-  border: 2px solid red;
-  text-align: center;
-}
-
-.message-tag {
-  color: red;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.message-content {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.message-clear {
-  font-size: 12px;
-}
