@@ -21,7 +21,11 @@
     <div class="section">
       <div class="container">
         <div class="left">
+          {% comment %}
           <img src="{{MyPost.image.url}}" style="height: 500px; width: 500px" />
+          {% endcomment %} {% for photo in MyPost.photo_set.all%}
+          <img src="{{photo.image.url}}" width="50" /><br />
+          {% endfor %}
         </div>
         <div class="right">
           <div class="auth-each-header each-header">
