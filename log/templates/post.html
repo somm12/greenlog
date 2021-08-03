@@ -28,7 +28,6 @@
           <select
             id="volunteerKinds"
             name="volunteerKinds"
-            {% comment %} onchange="handleOnChange(this)" {% endcomment %}
           >
             <option class="plo" value="플로깅">플로깅</option>
             <option value="채식">채식</option>
@@ -47,9 +46,8 @@
             <textarea name="contentInput" cols="50" rows="20"></textarea>
           </div>
           <div class="photo ele">
-            <input type="file" name="images" />
+            <input type="file" name="images" multiple/>
           </div>
-
           <div class="firstPlace ele">
             <span>플로깅 첫 시작 장소</span>
             {%block select_location%}

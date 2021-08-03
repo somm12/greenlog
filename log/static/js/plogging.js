@@ -27,7 +27,6 @@
 
 $(document).ready(function () {
   $("#volunteerKinds").on("change", function () {
-    console.log("this.value");
     if (this.value == "플로깅") {
       $(".firstPlace").show();
     } else {

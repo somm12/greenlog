@@ -8,14 +8,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href='{% static "css/eachNomal.css" %}' />
     <title>GreenLog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
     {% endblock%}
   </head>
   <body>
     {%block content%}
     <div class="section">
       <div class="container">
-        <div class="left">
-          <img src="{{MyPost.image.url}}" style="height: 500px; width: 500px" />
+        <div class="carousel-wrapper left">
+          <div class="owl-carousel owl-theme">
+            {% for photo in Image.all%}
+            <div class="item">
+              <img
+                class="img all"
+                src="{{photo.image.url}}"
+                alt=""
+                style="height: 500px; width: 500px; margin-right: 400px"
+              />
+            </div>
+            {% endfor %}
+          </div>
         </div>
         <div class="right">
           <div class="auth-each-header each-header">
@@ -74,6 +95,27 @@
         </div>
       </div>
     </div>
+    <script>
+      $(".owl-carousel").owlCarousel({
+        margin: 500,
+        nav: true,
+        navText: [
+          "<div class='nav-button owl-prev'>‹</div>",
+          "<div class='nav-button owl-next'>›</div>",
+        ],
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 2,
+          },
+          1000: {
+            items: 4,
+          },
+        },
+      });
+    </script>
     {% endblock %}
   </body>
 </html>

@@ -130,7 +130,9 @@ def mypage(request):
 
 def each(request, post_id): 
     MyPost = get_object_or_404(Post, pk = post_id)
+    Image=Photo.objects.filter(post=MyPost.id)
     Writer= User.objects.get(pk=MyPost.writer)
+
     like="false"
     if request.method == "POST":
         try:
@@ -141,7 +143,7 @@ def each(request, post_id):
                     MyPost.like_users.remove(user)
                     MyPost.like-=1
                     MyPost.save()
-                    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+                    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'Image':Image,'like':like})
             like="true"
             MyPost.like_users.add(user)
             MyPost.like+=1
@@ -149,7 +151,7 @@ def each(request, post_id):
         except:
             messages.warning(request, '로그인이 필요합니다.')
             return redirect('login')
-    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'Image':Image,'like':like})
 
 def post(request):
     return render(request, 'post.html')
@@ -161,17 +163,29 @@ def create(request):
     new_post.title=request.POST['title']
     new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
-    if request.FILES.get('images') :
-        new_post.image=request.FILES.get('images')
-    else :
-        new_post.image= "../static/images/noPhoto.png"
-    print(new_post.image)
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
     new_post.firstPlace=place1+'-'+place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
+
+    if request.FILES.get('images') :
+         # name 속성이 images input 태그로부터 받은 파일들을 반복문을 통해 하나씩 가져온다 
+        for img in request.FILES.getlist('images'):
+            # Photo 객체를 하나 생성한다.
+            photo = Photo()
+            # 외래키로 현재 생성한 Post의 기본키를 참조한다.
+            photo.post = new_post
+            # imgs로부터 가져온 이미지 파일 하나를 저장한다.
+            photo.image = img
+            # 데이터베이스에 저장
+            photo.save()
+    else :
+        photo = Photo()
+        photo.post = new_post
+        photo.image = "../static/images/noPhoto.png"
+        photo.save()
     return redirect('home')
 
 
@@ -189,9 +203,16 @@ def gogo(request):
     posts=Post.objects.all().filter(kinds='고고').distinct()
     return render(request, 'gogo.html',{'posts':posts})
 
+
 def vegetarian(request):
     posts=Post.objects.all().filter(kinds='채식').distinct()
-    return render(request, 'vegetarian.html',{'posts':posts})
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'vegetarian.html',{'All':All})
 
 def others(request):
     posts=Post.objects.all().filter(kinds='기타').distinct()

@@ -105,7 +105,75 @@ hr {
   margin: 0;
 }
 
-.img {
-  width: 100%;
+.each-header > img,
+.elements > img {
   border-radius: 70%;
+}
+
+/**
+* 카러셀 시작
+*/
+
+.carousel-wrapper {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.owl-carousel .owl-nav {
+  overflow: hidden;
+  height: 0px;
+}
+
+.item {
+  width: 500px;
+}
+
+.owl-item .active {
+  width: 500px;
+}
+
+.owl-carousel .item {
+  text-align: center;
+}
+
+.owl-carousel .nav-button {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 240px !important;
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled {
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.owl-carousel .owl-prev {
+  left: -3px;
+}
+
+.owl-carousel .owl-next {
+  right: -3px;
+}
+
+.owl-theme .owl-nav [class*="owl-"] {
+  color: #ffffff;
+  font-size: 39px;
+  background: #000000;
+  border-radius: 3px;
+}
+.owl-carousel .prev-carousel:hover {
+  background-position: 0px -53px;
+}
+.owl-carousel .next-carousel:hover {
+  background-position: -24px -53px;
+}
+
+.aaa {
+  visibility: hidden;
 }

@@ -107,8 +107,8 @@
 /* section2 -> 나의 활동 부분 carousel part */
 /* carousel API css */
 .owl-carousel img {
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 500px;
   padding: 10px;
 }
 .carousel-wrapper {
