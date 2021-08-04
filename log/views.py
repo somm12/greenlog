@@ -168,7 +168,7 @@ def create(request):
     new_post.content=request.POST['contentInput']
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
-    new_post.firstPlace=place1+'-'+place2
+    new_post.firstPlace= place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
@@ -187,15 +187,33 @@ def plogging(request):
     posts = Post.objects.filter(kinds='플로깅',firstPlace = place).distinct()
     if 'h_area2' in request.POST:
         posts = Post.objects.filter(firstPlace = place).distinct()
-    return render(request, 'plogging.html',{'place':place, 'posts':posts })
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'plogging.html',{'place':place, 'posts':posts, 'All':All })
 
 def container(request):
     posts=Post.objects.all().filter(kinds='용기내').distinct()
-    return render(request, 'container.html',{'posts':posts})
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'container.html',{'All':All})
 
 def gogo(request):
     posts=Post.objects.all().filter(kinds='고고').distinct()
-    return render(request, 'gogo.html',{'posts':posts})
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'gogo.html',{'All':All})
 
 def vegetarian(request):
     posts=Post.objects.all().filter(kinds='채식').distinct()
@@ -209,7 +227,13 @@ def vegetarian(request):
 
 def others(request):
     posts=Post.objects.all().filter(kinds='기타').distinct()
-    return render(request, 'others.html',{'posts':posts})
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'others.html',{'All':All})
 
 def edit_profile(request,user):
     user_profile = User.objects.get(nickname=user)
