@@ -70,6 +70,7 @@ def signup(request):
                     password = make_password(password),
                     profile = profile,
                 )
+
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})
     return render(request, 'signup.html')
@@ -132,6 +133,7 @@ def each(request, post_id):
     MyPost = get_object_or_404(Post, pk = post_id)
     Image=Photo.objects.filter(post=MyPost.id)
     Writer= User.objects.get(pk=MyPost.writer)
+
 
     like="false"
     if request.method == "POST":
@@ -214,7 +216,13 @@ def vegetarian(request):
         All.append(One)
     return render(request, 'vegetarian.html',{'All':All})
 
+
 def others(request):
     posts=Post.objects.all().filter(kinds='기타').distinct()
     return render(request, 'others.html',{'posts':posts})
+def edit_profile(request,user):
+    user_profile = User.objects.get(nickname=user)
+    user_profile.profile = request.FILES['profile']
+    user_profile.save()
+    return redirect('/mypage/?search=true&author=' + str(user_profile.nickname))
 

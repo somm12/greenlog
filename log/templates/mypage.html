@@ -20,7 +20,24 @@
   <section class="section1_profile">
     <!-- 파이썬으로 img, nickname 가져오기 -->
     <div class="myprofile_img my_image">
-      <img src="/static/images/{{membership.profile}}" alt="" />
+      <img src="{{ membership.profile.url }}" alt="" />
+      <div class="edit_profile">
+        <form
+          id="edit_profile"
+          action="{%url 'edit_profile' request.session.user %}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {%csrf_token%}
+          <input
+            required
+            type="file"
+            name="profile"
+            value="{{ membership.profile.url }}"
+          />
+          <button type="submit" id="edit_btn">수정하기</button>
+        </form>
+      </div>
     </div>
     <div class="myprofile_nickname">{{request.session.user}}님</div>
     {% comment %} {% if count > 10 %} {% endcomment %}

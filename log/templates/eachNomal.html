@@ -18,6 +18,7 @@
     />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+
     {% endblock%}
   </head>
   <body>
@@ -29,10 +30,9 @@
             {% for photo in Image.all%}
             <div class="item">
               <img
-                class="img all"
                 src="{{photo.image.url}}"
                 alt=""
-                style="height: 500px; width: 500px; margin-right: 400px"
+                style="height: 500px; width: 500px"
               />
             </div>
             {% endfor %}
@@ -48,7 +48,7 @@
           <hr />
           <div class="elements">
             <div class="each-header">
-              <img class="image" src="{{Writer.profile}}" alt="" />
+              <img class="image" src="{{Writer.profile.url}}" alt="" />
               <span style="display: block; margin-top: 9px"
                 >{{Writer.nickname}}</span
               >
@@ -97,7 +97,7 @@
     </div>
     <script>
       $(".owl-carousel").owlCarousel({
-        margin: 500,
+        margin: 15,
         nav: true,
         navText: [
           "<div class='nav-button owl-prev'>‹</div>",
@@ -108,10 +108,10 @@
             items: 1,
           },
           600: {
-            items: 2,
+            items: 1,
           },
           1000: {
-            items: 4,
+            items: 1,
           },
         },
       });
