@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
-
 from .models import Post,Photo
 from django.db.models import Count
+from django.contrib import messages
 
 
 def home(request):
@@ -44,7 +44,6 @@ def login(request):
     return redirect("home")
 
 def signup(request):
-   
     if request.method == 'GET':
         return render(request, 'signup.html')
     elif request.method == 'POST':
@@ -54,11 +53,8 @@ def signup(request):
             passwordcheck = request.POST['passwordcheck']
             profile = request.FILES['profile']
             
+
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
-            try:
-                print(0)
-            except print(0):
-                pass
             if not (password and passwordcheck and nickname and name and profile):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
                 return render(request, 'signup.html', res_data)
@@ -86,7 +82,6 @@ def logout(request):
         del(request.session['user'])
     return redirect('home')
 
-
 def mypage(request):
     myposts = Post.objects.order_by('-date')
     search = request.GET.get('search')
@@ -109,7 +104,7 @@ def mypage(request):
         elif my_postcount >= 75:
             my_membership.Member = "Ruby"      
         my_membership.save()
-        #
+        
         myposts_list = []#image url 추출하기
         date = []# 잔디밭 구현을 위한(월,일 담을) 리스트
         loop_counter = []#carousel row가 2개로 나오기 때문에 for반복문 횟수 미리 정함.
@@ -143,6 +138,7 @@ def mypage(request):
 
 def each(request, post_id): 
     MyPost = get_object_or_404(Post, pk = post_id)
+    Image=Photo.objects.filter(post=MyPost.id)
     Writer= User.objects.get(pk=MyPost.writer)
     like="false"
     if request.method == "POST":
@@ -154,10 +150,7 @@ def each(request, post_id):
                     MyPost.like_users.remove(user)
                     MyPost.like-=1
                     MyPost.save()
-                    if (MyPost.kinds=="플로깅" ):
-                        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
-                    else :
-                        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+                    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'Image':Image,'like':like})
             like="true"
             MyPost.like_users.add(user)
             MyPost.like+=1
@@ -165,24 +158,21 @@ def each(request, post_id):
         except:
             messages.warning(request, '로그인이 필요합니다.')
             return redirect('login')
-    if (MyPost.kinds=="플로깅" ):
-        return render(request, 'eachPlogging.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
-    else :
-        return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'like':like})
+    return render(request, 'eachNomal.html',{'MyPost':MyPost,'Writer':Writer,'Image':Image,'like':like})
+
+def post(request):
+    return render(request, 'post.html')
+
 
 def create(request):
     new_post = Post()
-    new_post.writer=request.session['user']
     new_post.kinds=request.POST['volunteerKinds']
+    new_post.title=request.POST['title']
+    new_post.writer=request.session['user']
     new_post.content=request.POST['contentInput']
-    # if request.FILES.get('images') :
-    #     new_post.image=request.FILES.get('images')
-    # else :
-    #     new_post.image= "../static/images/noPhoto.png"
-    # print(new_post.image)
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
-    new_post.firstPlace= place2
+    new_post.firstPlace=place1+'-'+place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
@@ -192,17 +182,9 @@ def create(request):
             photo.post = new_post
             photo.image = img
             photo.save()
-        return redirect('/each/' + str(new_post.id))
     else :
         new_post.image= "../static/images/noPhoto.png"
-    
-
-
     return redirect('home')
-
-
-def post(request):
-    return render(request, 'post.html')
 
 
 def plogging(request):
@@ -221,19 +203,20 @@ def gogo(request):
 
 def vegetarian(request):
     posts=Post.objects.all().filter(kinds='채식').distinct()
-    return render(request, 'vegetarian.html',{'posts':posts})
-
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'vegetarian.html',{'All':All})
 
 def others(request):
     posts=Post.objects.all().filter(kinds='기타').distinct()
     return render(request, 'others.html',{'posts':posts})
+
 def edit_profile(request,user):
     user_profile = User.objects.get(nickname=user)
     user_profile.profile = request.FILES['profile']
     user_profile.save()
     return redirect('/mypage/?search=true&author=' + str(user_profile.nickname))
-
-
-
-
-

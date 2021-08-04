@@ -6,26 +6,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href='{% static "css/eachNomal.css" %}' />
     <title>GreenLog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+
     {% endblock%}
   </head>
   <body>
-    {% if messages %}
-    <div>
-      {% for message in messages %} {{ message.tags }}! {{ message.message }}
-      {%endfor %}
-    </div>
-    {% endif %} {%block content%}
+    {%block content%}
     <div class="section">
       <div class="container">
-        <div class="left">
-          {% comment %}
-          <img src="{{MyPost.image.url}}" style="height: 500px; width: 500px" />
-          {% endcomment %} {% for photo in MyPost.photo_set.all%}
-          <img src="{{photo.image.url}}" width="50" /><br />
-          {% endfor %}
+        <div class="carousel-wrapper left">
+          <div class="owl-carousel owl-theme">
+            {% for photo in Image.all%}
+            <div class="item">
+              <img
+                src="{{photo.image.url}}"
+                alt=""
+                style="height: 500px; width: 500px"
+              />
+            </div>
+            {% endfor %}
+          </div>
         </div>
         <div class="right">
           <div class="auth-each-header each-header">
@@ -57,17 +68,19 @@
                 id="like"
                 name="like_button"
               >
-                {%if "true" in like%}
-                <img
-                  src="../static/images/fullHeart.png"
-                  style="width: 28px; height: 28px"
-                />
-                {%else%}
-                <img
-                  src="../static/images/heart.png"
-                  style="width: 28px; height: 28px"
-                />
-                {%endif%}
+                <div class="button-inner">
+                  {%if "true" in like%}
+                  <img
+                    src="../static/images/fullHeart.png"
+                    style="width: 100%; height: 100%"
+                  />
+                  {%else%}
+                  <img
+                    src="../static/images/heart.png"
+                    style="width: 100%; height: 100%"
+                  />
+                  {%endif%}
+                </div>
               </button>
             </form>
 
@@ -82,13 +95,27 @@
         </div>
       </div>
     </div>
-    {% endblock %}
     <script>
-      $(document).ready(function () {
-        $(".message-clear").click(function () {
-          $(".message-wrap").fadeOut();
-        });
+      $(".owl-carousel").owlCarousel({
+        margin: 15,
+        nav: true,
+        navText: [
+          "<div class='nav-button owl-prev'>‹</div>",
+          "<div class='nav-button owl-next'>›</div>",
+        ],
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 1,
+          },
+          1000: {
+            items: 1,
+          },
+        },
       });
     </script>
+    {% endblock %}
   </body>
 </html>
