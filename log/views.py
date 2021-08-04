@@ -21,7 +21,6 @@ def login(request):
     if not (nickname and password):
         res_data['error'] = '모든 값을 입력해야 합니다.'
         return render(request, 'login.html', res_data)
-        
     else:
         try: 
             user = User.objects.get(nickname = nickname)
@@ -53,7 +52,6 @@ def signup(request):
             passwordcheck = request.POST['passwordcheck']
             profile = request.FILES['profile']
             
-
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
             if not (password and passwordcheck and nickname and name and profile):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
@@ -71,8 +69,6 @@ def signup(request):
                     password = make_password(password),
                     profile = profile,
                 )
-                
-
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})
     return render(request, 'signup.html')
@@ -140,6 +136,7 @@ def each(request, post_id):
     MyPost = get_object_or_404(Post, pk = post_id)
     Image=Photo.objects.filter(post=MyPost.id)
     Writer= User.objects.get(pk=MyPost.writer)
+
     like="false"
     if request.method == "POST":
         try:
@@ -163,7 +160,6 @@ def each(request, post_id):
 def post(request):
     return render(request, 'post.html')
 
-
 def create(request):
     new_post = Post()
     new_post.kinds=request.POST['volunteerKinds']
@@ -185,7 +181,6 @@ def create(request):
     else :
         new_post.image= "../static/images/noPhoto.png"
     return redirect('home')
-
 
 def plogging(request):
     place =  request.GET.get("h_area2")
@@ -209,6 +204,7 @@ def container(request):
         One.append(Photo.objects.filter(post=post.id).first().image.url)
         All.append(One)
     return render(request, 'container.html',{'All':All})
+
 def gogo(request):
     posts=Post.objects.all().filter(kinds='고고').distinct()
     All=[]
