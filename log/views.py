@@ -115,6 +115,7 @@ def mypage(request):
         loop_counter = []#carousel row가 2개로 나오기 때문에 for반복문 횟수 미리 정함.
         id = []# 내가 쓴 게시물로 이동을 위해 id를 담은 리스트
         
+        #사진 업로드 여러개 가능 -> 이에 대해서 각 해당 포스트의 image 리스트에서 첫 번째 사진을 대표로 썸네일로 정함.
         for mypost in myposts:
             for index, photo in enumerate(mypost.photo_set.all()):
                 if index == 0:
