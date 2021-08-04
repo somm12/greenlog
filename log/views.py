@@ -21,7 +21,6 @@ def login(request):
     if not (nickname and password):
         res_data['error'] = '모든 값을 입력해야 합니다.'
         return render(request, 'login.html', res_data)
-        
     else:
         try: 
             user = User.objects.get(nickname = nickname)
@@ -53,7 +52,6 @@ def signup(request):
             passwordcheck = request.POST['passwordcheck']
             profile = request.FILES['profile']
             
-
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
             if not (password and passwordcheck and nickname and name and profile):
                 res_data['error'] = '모든 값을 입력해야 합니다.'
@@ -71,8 +69,6 @@ def signup(request):
                     password = make_password(password),
                     profile = profile,
                 )
-                
-
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})
     return render(request, 'signup.html')
@@ -140,6 +136,7 @@ def each(request, post_id):
     MyPost = get_object_or_404(Post, pk = post_id)
     Image=Photo.objects.filter(post=MyPost.id)
     Writer= User.objects.get(pk=MyPost.writer)
+
     like="false"
     if request.method == "POST":
         try:
@@ -163,7 +160,6 @@ def each(request, post_id):
 def post(request):
     return render(request, 'post.html')
 
-
 def create(request):
     new_post = Post()
     new_post.kinds=request.POST['volunteerKinds']
@@ -172,7 +168,7 @@ def create(request):
     new_post.content=request.POST['contentInput']
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
-    new_post.firstPlace=place1+'-'+place2
+    new_post.firstPlace= place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
@@ -186,20 +182,38 @@ def create(request):
         new_post.image= "../static/images/noPhoto.png"
     return redirect('home')
 
-
 def plogging(request):
     place =  request.GET.get("h_area2")
     posts = Post.objects.filter(kinds='플로깅',firstPlace = place).distinct()
     if 'h_area2' in request.POST:
         posts = Post.objects.filter(firstPlace = place).distinct()
-    return render(request, 'plogging.html',{'place':place, 'posts':posts })
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'plogging.html',{'place':place, 'posts':posts, 'All':All })
 
 def container(request):
     posts=Post.objects.all().filter(kinds='용기내').distinct()
-    return render(request, 'container.html',{'posts':posts})
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'container.html',{'All':All})
+
 def gogo(request):
     posts=Post.objects.all().filter(kinds='고고').distinct()
-    return render(request, 'gogo.html',{'posts':posts})
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'gogo.html',{'All':All})
 
 def vegetarian(request):
     posts=Post.objects.all().filter(kinds='채식').distinct()
@@ -213,7 +227,13 @@ def vegetarian(request):
 
 def others(request):
     posts=Post.objects.all().filter(kinds='기타').distinct()
-    return render(request, 'others.html',{'posts':posts})
+    All=[]
+    for post in posts:
+        One=[]
+        One.append(post.id)
+        One.append(Photo.objects.filter(post=post.id).first().image.url)
+        All.append(One)
+    return render(request, 'others.html',{'All':All})
 
 def edit_profile(request,user):
     user_profile = User.objects.get(nickname=user)
