@@ -3,7 +3,7 @@ from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 
-from .models import Post
+from .models import Post,Photo
 from django.db.models import Count
 
 
@@ -115,8 +115,13 @@ def mypage(request):
         loop_counter = []#carousel row가 2개로 나오기 때문에 for반복문 횟수 미리 정함.
         id = []# 내가 쓴 게시물로 이동을 위해 id를 담은 리스트
         
+        #사진 업로드 여러개 가능 -> 이에 대해서 각 해당 포스트의 image 리스트에서 첫 번째 사진을 대표로 썸네일로 정함.
         for mypost in myposts:
-            image_url = str(mypost.image.url)
+            for index, photo in enumerate(mypost.photo_set.all()):
+                if index == 0:
+                    image_url = str(photo.image.url)
+                else:
+                    break
             ids = mypost.id
             id.append(ids)
             myposts_list.append(image_url)
@@ -170,17 +175,27 @@ def create(request):
     new_post.writer=request.session['user']
     new_post.kinds=request.POST['volunteerKinds']
     new_post.content=request.POST['contentInput']
-    if request.FILES.get('images') :
-        new_post.image=request.FILES.get('images')
-    else :
-        new_post.image= "../static/images/noPhoto.png"
-    print(new_post.image)
+    # if request.FILES.get('images') :
+    #     new_post.image=request.FILES.get('images')
+    # else :
+    #     new_post.image= "../static/images/noPhoto.png"
+    # print(new_post.image)
     place1 = request.POST["h_area1"]
     place2 = request.POST["h_area2"]
     new_post.firstPlace= place2
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
+    if request.FILES.getlist('images'):
+        for img in request.FILES.getlist('images'):
+            photo = Photo()
+            photo.post = new_post
+            photo.image = img
+            photo.save()
+        return redirect('/each/' + str(new_post.id))
+    else :
+        new_post.image= "../static/images/noPhoto.png"
+    
 
 
     return redirect('home')
