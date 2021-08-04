@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
-from .models import Post
+from .models import Post,Photo
 from django.db.models import Count
 from django.contrib import messages
 
@@ -51,7 +51,8 @@ def signup(request):
             name = request.POST['name']
             password = request.POST['password']
             passwordcheck = request.POST['passwordcheck']
-            profile = request.POST['profile']
+            profile = request.FILES['profile']
+            
 
             res_data = {} #응답 메시지를 담을 변수(딕셔너리)
             if not (password and passwordcheck and nickname and name and profile):
@@ -70,6 +71,7 @@ def signup(request):
                     password = make_password(password),
                     profile = profile,
                 )
+                
 
                 user.save() #데이터베이스에 저장
                 return render(request, 'signup_done.html', {'message': '회원가입을 완료하였습니다.'})
@@ -108,8 +110,13 @@ def mypage(request):
         loop_counter = []#carousel row가 2개로 나오기 때문에 for반복문 횟수 미리 정함.
         id = []# 내가 쓴 게시물로 이동을 위해 id를 담은 리스트
         
+        #사진 업로드 여러개 가능 -> 이에 대해서 각 해당 포스트의 image 리스트에서 첫 번째 사진을 대표로 썸네일로 정함.
         for mypost in myposts:
-            image_url = str(mypost.image.url)
+            for index, photo in enumerate(mypost.photo_set.all()):
+                if index == 0:
+                    image_url = str(photo.image.url)
+                else:
+                    break
             ids = mypost.id
             id.append(ids)
             myposts_list.append(image_url)
@@ -133,8 +140,6 @@ def each(request, post_id):
     MyPost = get_object_or_404(Post, pk = post_id)
     Image=Photo.objects.filter(post=MyPost.id)
     Writer= User.objects.get(pk=MyPost.writer)
-
-
     like="false"
     if request.method == "POST":
         try:
@@ -171,23 +176,14 @@ def create(request):
     new_post.like=0
     new_post.date= timezone.datetime.now()
     new_post.save()
-
-    if request.FILES.get('images') :
-         # name 속성이 images input 태그로부터 받은 파일들을 반복문을 통해 하나씩 가져온다 
+    if request.FILES.getlist('images'):
         for img in request.FILES.getlist('images'):
-            # Photo 객체를 하나 생성한다.
             photo = Photo()
-            # 외래키로 현재 생성한 Post의 기본키를 참조한다.
             photo.post = new_post
-            # imgs로부터 가져온 이미지 파일 하나를 저장한다.
             photo.image = img
-            # 데이터베이스에 저장
             photo.save()
     else :
-        photo = Photo()
-        photo.post = new_post
-        photo.image = "../static/images/noPhoto.png"
-        photo.save()
+        new_post.image= "../static/images/noPhoto.png"
     return redirect('home')
 
 
@@ -205,7 +201,6 @@ def gogo(request):
     posts=Post.objects.all().filter(kinds='고고').distinct()
     return render(request, 'gogo.html',{'posts':posts})
 
-
 def vegetarian(request):
     posts=Post.objects.all().filter(kinds='채식').distinct()
     All=[]
@@ -216,13 +211,12 @@ def vegetarian(request):
         All.append(One)
     return render(request, 'vegetarian.html',{'All':All})
 
-
 def others(request):
     posts=Post.objects.all().filter(kinds='기타').distinct()
     return render(request, 'others.html',{'posts':posts})
+
 def edit_profile(request,user):
     user_profile = User.objects.get(nickname=user)
     user_profile.profile = request.FILES['profile']
     user_profile.save()
     return redirect('/mypage/?search=true&author=' + str(user_profile.nickname))
-
