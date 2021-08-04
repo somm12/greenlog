@@ -4,7 +4,7 @@ class User(models.Model):
     name = models.CharField(max_length=10,default='')
     nickname = models.CharField(max_length=10,primary_key=True)
     password =models.CharField(max_length=30,default='')
-    profile = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None, blank=True, null=True)
+    profile = models.ImageField(upload_to='images/', height_field=None, width_field=None, max_length=None, blank=True, null=True)
     Member =models.CharField(max_length=10,default='')
 
 class Post(models.Model):
@@ -19,4 +19,4 @@ class Post(models.Model):
     
 class Photo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(upload_to=None, blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
