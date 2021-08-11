@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}{% block extrahead %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href='{% static "css/eachNomal.css" %}' />
+    <title>GreenLog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+
+    {% endblock%}
+  </head>
+  <body>
+    {%block content%}
+    <div class="section">
+      <div class="container">
+        <div class="carousel-wrapper left">
+          <div class="owl-carousel owl-theme">
+            {% for photo in Image.all%}
+            <div class="item">
+              <img
+                src="{{photo.image.url}}"
+                alt=""
+                style="height: 500px; width: 500px"
+              />
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="right">
+          <div class="auth-each-header each-header">
+            <img class="image" src="{{Writer.profile.url}}" />
+            <span style="display: block; margin-top: 9px"
+              >{{Writer.nickname}}</span
+            >
+          </div>
+          <hr />
+          <div class="elements">
+            <div class="each-header">
+              <img class="image" src="{{Writer.profile.url}}" alt="" />
+              <span style="display: block; margin-top: 9px"
+                >{{Writer.nickname}}</span
+              >
+            </div>
+            <div class="content">
+              <p class="title">{{MyPost.title}}</p>
+              <p>{{MyPost.content}}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="like">
+            <form action="{% url 'each' MyPost.id %}" method="POST">
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="like-button"
+                id="like"
+                name="like_button"
+              >
+                <div class="button-inner">
+                  {%if "true" in like%}
+                  <img
+                    src="../static/images/fullHeart.png"
+                    style="width: 100%; height: 100%"
+                  />
+                  {%else%}
+                  <img
+                    src="../static/images/heart.png"
+                    style="width: 100%; height: 100%"
+                  />
+                  {%endif%}
+                </div>
+              </button>
+            </form>
+            <div class="likecount">
+              <p>좋아요 {{MyPost.like}}</p>
+            </div>
+          </div>
+          <div class="date">
+            <p>{{MyPost.date}}</p>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+    <script>
+      $(".owl-carousel").owlCarousel({
+        margin: 15,
+        nav: true,
+        navText: [
+          "<div class='nav-button owl-prev'>‹</div>",
+          "<div class='nav-button owl-next'>›</div>",
+        ],
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 1,
+          },
+          1000: {
+            items: 1,
+          },
+        },
+      });
+    </script>
+    {% endblock %}
+  </body>
+</html>

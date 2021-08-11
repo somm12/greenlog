@@ -1,0 +1,134 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+}
+.body {
+  background-color: white;
+}
+
+.loginform {
+  position: absolute;
+  width: 350px;
+  height: 550px;
+  padding: 30px, 20px;
+  background-color: rgb(237, 248, 223);
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+}
+.loginform h1 {
+  text-align: center;
+  margin: 40px;
+  font-size: x-large;
+  font-weight: bold;
+}
+.nameform {
+  border-bottom: 2px solid black;
+  margin: 30px;
+  padding: 10px 10px;
+}
+.idform {
+  border-bottom: 2px solid black;
+  margin: 30px;
+  padding: 10px 10px;
+}
+
+.passwordform {
+  border-bottom: 2px solid black;
+  margin: 30px;
+  padding: 10px 10px;
+}
+
+.passwordcheckform {
+  border-bottom: 2px solid black;
+  margin: 30px;
+  padding: 10px 10px;
+}
+
+.nicknameform {
+  border-bottom: 2px solid black;
+  margin: 30px;
+  padding: 10px 10px;
+}
+.name {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  right: 25px;
+  background: none;
+}
+.id {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  right: 25px;
+  background: none;
+}
+.password {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  height: 25px;
+  background: none;
+}
+.passwordcheck {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  height: 25px;
+  background: none;
+}
+.nickname {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  height: 25px;
+  background: none;
+}
+.btn {
+  position: relative;
+  left: 40%;
+  transform: translateX(-50%);
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 80%;
+  height: 40px;
+  background: white;
+  background-position: left;
+  background-size: 200%;
+  color: black;
+  font-size: 17px;
+  font-weight: 20;
+  border: none;
+  cursor: pointer;
+  display: inline;
+}
+
+.photo {
+  display: flex;
+  justify-content: center;
+}
+
+.word {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  margin: 0px 8px 0px 30px;
+}
+.error {
+  padding-top: 20px;
+  color: red;
+}

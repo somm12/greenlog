@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}{% block extrahead %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenLog</title>
+    <link />
+    <link rel="stylesheet" href="{% static 'css/post.css' %}" />
+    <link rel="stylesheet" href='{% static "css/reset.css" %}' />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    {% endblock%}
+  </head>
+  <body>
+    {%block content%}
+    <div class="bodyall">
+      <form
+        action={%url 'create'%}
+        enctype="multipart/form-data"
+        method="POST"
+        class="container"
+      >
+        {% csrf_token %}
+        <div class="kind">
+          <label class="kinds" for="volunteerKinds">봉사 종류</label>
+          <select
+            id="volunteerKinds"
+            name="volunteerKinds"
+          >
+            <option class="plo" value="플로깅">플로깅</option>
+            <option value="채식">채식</option>
+            <option value="용기내">용기내</option>
+            <option value="고고">고고</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div class="main">
+          <div class="title ele">
+            <span>제목</span>
+            <input type="text" name="title" />
+          </div>
+          <div class="content ele">
+            <span>내용</span>
+            <textarea name="contentInput" cols="50" rows="20"></textarea>
+          </div>
+          <div class="photo ele">
+            <input type="file" name="images" multiple/>
+          </div>
+          <div class="firstPlace ele">
+            <span>플로깅 첫 시작 장소</span>
+            {%block select_location%}
+              {% include  'selectLocation.html' %}
+            {%endblock%}
+          </form>
+          </div>
+          <div>
+            <input type="submit" class="submit" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript" src="/static/js/plogging.js"></script>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,222 @@
+{% extends 'base.html' %} {%block content%}{% load static %}
+<head>
+  {% block extrahead %}
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+  />
+  <link rel="stylesheet" href='{% static "css/mypage.css" %}' />
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+
+  {% endblock%}
+</head>
+<div class="mypage_main">
+  <section class="section1_profile">
+    <!-- 파이썬으로 img, nickname 가져오기 -->
+    <div class="myprofile_img my_image">
+      <img src="{{ membership.profile.url }}" alt="" />
+      <div class="edit_profile">
+        <form
+          id="edit_profile"
+          action="{%url 'edit_profile' request.session.user %}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {%csrf_token%}
+          <input
+            required
+            type="file"
+            name="profile"
+            value="{{ membership.profile.url }}"
+          />
+          <button type="submit" id="edit_btn">수정하기</button>
+        </form>
+      </div>
+    </div>
+    <div class="myprofile_nickname">{{request.session.user}}님</div>
+    {% comment %} {% if count > 10 %} {% endcomment %}
+    <div class="myprofile_rank">등급 : silver🪙</div>
+    {% comment %} {% endif%} {% endcomment %}
+    <div class="user_level">
+      <div class="level_description">
+        <div class="level_title">
+          <div class="level">레벨</div>
+          <div class="num">개수</div>
+        </div>
+        <div class="level_mark">
+          <div class="level_mark_col">
+            <div class="level_name">Bronze</div>
+            <div class="level_num">0 - 14개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Silver</div>
+            <div class="level_num">15 - 29개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Gold</div>
+            <div class="level_num">30 - 44개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Platinum</div>
+            <div class="level_num">45 - 59개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Diamond</div>
+            <div class="level_num">60 - 75개</div>
+          </div>
+          <div class="level_mark_col">
+            <div class="level_name">Ruby</div>
+            <div class="level_num">75개 이상</div>
+          </div>
+        </div>
+      </div>
+      <div class="left_post_num">
+        <div class="next_level">Silver</div>
+        <div class="left_num_text">까지 5개남음</div>
+      </div>
+    </div>
+  </section>
+  <section class="section2_mypost_activity">
+    <div class="carousel-wrapper">
+      <div class="owl-carousel owl-theme">
+        {% if count is 0%}
+        <div class="no_post_mark">게시물 없음</div>
+        {% endif%} {% for i in loop_counter%}
+        <div class="item">
+          <a class="post_link1" href="{% url 'each' 1234%}"
+            ><img class="post_image1" alt=""
+          /></a>
+          {% if not forloop.last %}
+          <a class="post_link2" href="{% url 'each' 1234%}"
+            ><img class="post_image2" alt=""
+          /></a>
+          {% endif %} {% if forloop.last and myposts|length|divisibleby:2 %}
+          {%if count > 1 and count|divisibleby:2%}
+          <a class="post_link2" href="{% url 'each' 1234%}"
+            ><img class="post_image2" alt=""
+          /></a>
+          {% endif %} {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="my_lawn">
+      <div class="my_lawn_detail">
+        <section class="month">
+          <div>Jan</div>
+          <div>Feb</div>
+          <div>Mar</div>
+          <div>Apr</div>
+          <div>May</div>
+          <div>Jun</div>
+          <div>Jul</div>
+          <div>Aug</div>
+          <div>Sep</div>
+          <div>Oct</div>
+          <div>Nov</div>
+          <div>Dec</div>
+        </section>
+        <section class="my_lawn_date">
+          <div class="what_day">
+            <div>Mon</div>
+            <div>Wed</div>
+            <div>Fri</div>
+          </div>
+          <div class="count_day"></div>
+          <!-- 52주 -->
+          <!-- <div class="week">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div> -->
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+<script type="text/javascript">
+  //전역변수..
+    const post_count = {{count|safe}};
+    const membership = "{{membership.Member|safe}}";
+    const dates = "{{dates|safe}}";// [월, 일 ,월, 일 ...]형식이며 두 개씩세트
+</script>
+<script type="text/javascript" src="/static/js/mypage.js"></script>
+<script>
+  var post_id = {{id|safe}};
+  console.log(post_id[0]);
+    var test = "{{myposts_list|safe}}";
+    test = test.substring(1, test.length - 1);
+    test = test.split(",");
+    var loop_count = "{{loop_counter|length}}";
+    var count = "{{count|safe}}";
+
+    console.log(loop_count);
+    test[0] = " " + test[0].substring(0, test[0].length);
+    console.log(test);
+    var k = 0;
+
+    for (var i = 1; i <= loop_count; i++) {
+      $(".item:nth-child(" + i + ") .post_image1").attr(
+        "src",
+        test[k].substring(2, test[k].length - 1)
+      );
+      //mypost a href 에 url 설정
+      var post_url = $(".item:nth-child(" + i + ") .post_link1").attr(
+            'href').replace(/1234/,post_id[k].toString());
+      $(".item:nth-child(" + i + ") .post_link1").attr({
+            'href' : post_url
+
+          });
+
+      if (test.length - 1 >= k + 1) {
+        //if문 post 개수가 홀수 일 때 array index가 초과 되지 않도록 함
+        console.log("dd");
+
+        $(".item:nth-child(" + i + ") .post_image2").attr(
+          "src",
+          test[k + 1].substring(2, test[k + 1].length - 1)
+        );
+        post_url = $(".item:nth-child(" + i + ") .post_link2").attr(
+            'href').replace(/1234/,post_id[k+1].toString());
+      $(".item:nth-child(" + i + ") .post_link2").attr({
+            'href' : post_url
+
+          });
+      }
+      k += 2;
+    }
+
+
+    console.log(test[5]);
+    $(".owl-carousel").owlCarousel({
+      margin: 15,
+      nav: true,
+      navText: [
+        "<div class='nav-button owl-prev'>‹</div>",
+        "<div class='nav-button owl-next'>›</div>",
+      ],
+      responsive: {
+        0: {
+          items: 1,
+        },
+        600: {
+          items: 2,
+        },
+        1000: {
+          items: 4,
+        },
+      },
+    });
+</script>
+{% endblock%}

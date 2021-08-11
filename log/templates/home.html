@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {%block content%}{% load static %}
+<head>
+  {% block extrahead %}
+  <link rel="stylesheet" href='{% static "css/home.css" %}' />
+  {% endblock%}
+</head>
+<body class="home_body">
+  <div class="opacity-for-homepage-box"></div>
+
+  <img
+    class="greenlog_back_img"
+    src="../static/images/plastic_trash.jpg"
+    alt="이미지"
+  />
+  <section class="main_page">
+    <div class="intro_box">
+      <div>
+        <div class="main_logo">
+          <img src="../static/images/logo.png" alt="" />
+        </div>
+        <div class="intro">
+          <span class="intro_content">
+            GreenLog🌿는 자발적으로 환경(Green)봉사활동에 참여한 기록(Log)공유
+            서비스를 제공합니다. <br /><br />그린로그 사용자들은 사진 업로드를
+            통해 서로의 활동을 공유할 수 있으며 플로깅을 할 때에는 위치 기록을
+            통해 플로깅 장소를 공유할 수 있습니다.<br /><br />
+            자신의 활동기록 빈도를 알 수 있는 잔디밭 기능을 제공하고 적극적인
+            환경보호활동에 참여할 수 있도록 도움을 줍니다.
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="login_make_post_box">
+      {% if request.session.user %}
+      <div>
+        <div class="make_post intro_btn">
+          <a href="{% url 'post' %}">글쓰기</a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endblock%}
+</body>

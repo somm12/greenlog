@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Plogging view</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/plogging.css' %}"
+    />
+    <link rel="stylesheet" href='{% static "css/reset.css" %}' />
+  </head>
+  <body>
+    <div class="select">
+      <div>
+        {%block select_location%} {% include 'selectLocation.html' %}
+        {%endblock%}
+      </div>
+      <button class="btn">검색</button>
+    </form>
+    </div>
+    <div class="container">
+      {% if place %} 
+        {% if posts %} {% for post in All %}
+        <a href="{% url 'each' post.0 %}">
+          <img class="photo" src="{{post.1}}" />
+        </a>
+        {% endfor %}{% else %}
+        해당 지역 게시글이 없습니다.
+        {% endif %} 
+        {% endif %}
+    </div>
+    <br /><br /><br />
+  </body>
+  {%endblock%}
+</html>

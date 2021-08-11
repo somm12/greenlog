@@ -1,0 +1,121 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+}
+
+.body {
+  background-color: white;
+}
+
+.loginform {
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  padding: 30px, 20px;
+  background-color: rgb(237, 248, 223);
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+}
+.loginform h1 {
+  text-align: center;
+  margin: 30px;
+  font-size: x-large;
+  font-weight: bold;
+}
+.nicknameform {
+  border-bottom: 2px solid black;
+  margin: 30px;
+  padding: 10px 10px;
+}
+
+.passwordform {
+  border-bottom: 2px solid black;
+  margin: 30px;
+  padding: 10px 10px;
+}
+.nickname {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  right: 25px;
+  background: none;
+}
+.password {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  height: 25px;
+  background: none;
+}
+.btn {
+  position: relative;
+  left: 40%;
+  transform: translateX(-50%);
+  margin-top: 25px;
+  margin-bottom: 40px;
+  width: 80%;
+  height: 40px;
+  background: white;
+  background-position: left;
+  background-size: 200%;
+  color: black;
+  font-size: 17px;
+  font-weight: 20;
+  border: none;
+  cursor: pointer;
+  display: inline;
+}
+
+.bottomText {
+  text-align: center;
+  font-size: 15px;
+}
+.bottomText a {
+  font-weight: 600;
+}
+.error {
+  margin-top: 60px;
+  color: red;
+}
+
+.bottomText > a {
+  color: green;
+  font-weight: 600;
+}
+
+.message-wrap {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  margin-top: 30px;
+  width: 360px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  border: 2px solid green;
+  text-align: center;
+}
+
+.message-tag {
+  color: green;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.message-content {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.message-clear {
+  font-size: 12px;
+}
