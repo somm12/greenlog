@@ -91,6 +91,9 @@
   border-radius: 8px;
   background-color: rgb(174, 216, 123);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .login_make_post_box .login a {
   text-decoration: none;

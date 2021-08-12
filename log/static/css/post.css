@@ -31,7 +31,10 @@
 .photo > input {
   width: 180px;
 }
-
+.multiple_image_text {
+  font-size: 13px;
+  font-weight: 600;
+}
 .submit {
   margin: 10px;
 }
