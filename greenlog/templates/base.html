@@ -10,8 +10,10 @@
       content="upgrade-insecure-requests"
     />
 
+    {% block extrahead %} {% endblock %}
     <link rel="stylesheet" href='{% static "css/reset.css" %}' />
     <link rel="stylesheet" href='{% static "css/nav.css" %}' />
+    <!--css 파일 넣는곳-->
   </head>
   <body>
     <div class="header">
