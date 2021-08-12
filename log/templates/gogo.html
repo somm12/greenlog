@@ -1,15 +1,20 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>고고 챌린지</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/normal_page_view.css' %}" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/normal_page_view.css' %}"
+    />
     <link rel="stylesheet" href='{% static "css/reset.css" %}' />
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
       {% for post in All %}
       <a href="{% url 'each' post.0 %}">
@@ -17,6 +22,7 @@
       </a>
       {% endfor %}
     </div>
-    <br><br><br>
-</body>
-{%endblock%}
+    <br /><br /><br />
+  </body>
+  {%endblock%}
+</html>
