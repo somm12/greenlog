@@ -127,7 +127,3 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-@font-face {
-  font-family: "돋움";
-  src: local("Apple SD Gothic Neo");
-}
