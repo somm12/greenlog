@@ -5,11 +5,9 @@
 > 그린로그 사용자들은 사진 업로드를 통해 서로의 활동을 공유할 수 있으며 플로깅시, 위치 기록을 통해 플로깅 장소를 공유할 수 있습니다. 자신의 활동기록 빈도 수를 알 수 있는 잔디밭 기능을 제공하고 있고 적극적인 환경보호 활동에 참여할 수 있도록 도움을 줍니다.             
 
 <br>
-<br>
 
-## 🗓PROJECT PERIOD : 2021.05 ~ 2021.07
+## 🗓 PROJECT PERIOD : 2021.05 ~ 2021.07
 
-<br>
 <br>
                
 
@@ -19,15 +17,46 @@
 - 배지현 : 게시글 작성, 게시글 View
 
 <br>
-<br>
 
 ## 🛠TECH STACK🛠
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=ffffff"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=ffffff"/> <img src="https://img.shields.io/badge/Django-092E20?style=flat-square&logo=Django&logoColor=ffffff"/> <img src="https://img.shields.io/badge/HTML-E34F26?style=flat-square&logo=HTML5&logoColor=ffffff"/> <img src="https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=CSS3&logoColor=ffffff"/> <img src="https://img.shields.io/badge/Heroku-430098?style=flat-square&logo=Heroku&logoColor=ffffff"/> 
 
 <br>
+
+
+## 📝 목차
+- [주요기능](#-주요기능)
+- [프론트 구조](#프론트-구조)
+- [메인 페이지](#메인-페이지)
+- [게시글 작성](#게시글-작성)
+- [전체 게시글 조회](#전체-게시글-조회)
+- [전체 게시글 조회 - 플로깅](#전체-게시글-조회플로깅)
+- [각 게시글](#각-게시글)
+- [MY PAGE](#my-page)
+- [프로젝트 소개영상](#-프로젝트-소개-영상)
+- [협업 방식](#-협업-방식)
+<br>
 <br>
 
-## MAIN PAGE
+## 💎 주요기능
+<img width="600" alt="스크린샷 2022-07-09 오후 7 33 22" src="https://user-images.githubusercontent.com/63543733/178102003-bd6a91b1-e60c-42ee-9f25-1077e6b4eb0f.png">
+
+<img width="600" alt="스크린샷 2022-07-09 오후 7 33 28" src="https://user-images.githubusercontent.com/63543733/178102009-81378e13-05ea-483a-abe6-f92a8b4f5df8.png">
+
+<br>
+<br>
+
+## 프론트 구조
+
+<img width="600" alt="스크린샷 2022-07-09 오후 7 28 38" src="https://user-images.githubusercontent.com/63543733/178102242-7a84fe50-8405-42ee-98a9-ab0c78397ac4.png">
+
+
+
+<br>
+<br>
+
+
+## 메인 페이지
 
 <img width="957" alt="image" src="https://user-images.githubusercontent.com/63543733/165714449-8a64a38a-543f-49a8-8f4a-7f174e8a0a75.png">
 
@@ -54,7 +83,7 @@
 <br>
 <br>
 
-## 전체 게시글 조회 - 플로깅
+## 전체 게시글 조회(플로깅)
 <img width="901" alt="image" src="https://user-images.githubusercontent.com/63543733/165716231-0daed9ae-e20e-40c5-a80d-14d42ca26155.png">
 
 > 플로깅 게시물 뷰 : 플로깅 장소 공유를 위해 위치에 따른 검색 기능 구현
@@ -78,11 +107,15 @@
 <br>
 
 
-## 프로젝트 소개 영상
+## 📺 프로젝트 소개 영상
 https://www.youtube.com/watch?v=QuatXim0HoA&t=2s
+<br>
+<br>
 
+## ⏰ 협업 방식
+<img width="600" alt="스크린샷 2022-07-09 오후 7 27 45" src="https://user-images.githubusercontent.com/63543733/178102300-514b924b-b23a-47ab-b1b6-e94932868259.png">
 
-
+Notion으로 회의 일정을 정하고 주 2회 구글미트를 통해 현재까지 진행상황과 이슈를 공유하고 이후 일정에 대해 계획했습니다.
 
 
 
