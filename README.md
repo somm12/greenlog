@@ -116,7 +116,13 @@ https://www.youtube.com/watch?v=QuatXim0HoA&t=2s
 <img width="600" alt="스크린샷 2022-07-09 오후 7 27 45" src="https://user-images.githubusercontent.com/63543733/178102300-514b924b-b23a-47ab-b1b6-e94932868259.png">
 
 Notion으로 회의 일정을 정하고 주 2회 구글미트를 통해 현재까지 진행상황과 이슈를 공유하고 이후 일정에 대해 계획했습니다.
+<br>
+<br>
+<img width="700" alt="스크린샷 2022-07-09 오후 10 52 22" src="https://user-images.githubusercontent.com/63543733/178108742-2e4a595c-0997-4b4e-96cd-9fd291a543f0.png">
+<img width="700" alt="스크린샷 2022-07-09 오후 5 12 45" src="https://user-images.githubusercontent.com/63543733/178108753-7ac59768-2173-469e-84f3-f43e029056d7.png">
+<img width="700" alt="스크린샷 2022-07-09 오후 5 13 46" src="https://user-images.githubusercontent.com/63543733/178108781-25f3841f-3a0a-4d25-bc86-ce41cd97e927.png">
 
+slack과 Github를 연동시키고 팀 채널에 commit 메세지 알림을 추가해서 회의 중이 아닐 때에도 진행상황 공유했습니다. 
 
 
 
